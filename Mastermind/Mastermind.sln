@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind", "Mastermind.csproj", "{B64D560B-4EDD-4C03-A26A-30BB4FC55D95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MastermindTests", "..\MastermindTests\MastermindTests.csproj", "{0B7637F8-1213-4607-89EF-090BC4A27448}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{B64D560B-4EDD-4C03-A26A-30BB4FC55D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B64D560B-4EDD-4C03-A26A-30BB4FC55D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B64D560B-4EDD-4C03-A26A-30BB4FC55D95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B7637F8-1213-4607-89EF-090BC4A27448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B7637F8-1213-4607-89EF-090BC4A27448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B7637F8-1213-4607-89EF-090BC4A27448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B7637F8-1213-4607-89EF-090BC4A27448}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
