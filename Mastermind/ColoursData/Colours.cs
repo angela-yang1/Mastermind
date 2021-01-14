@@ -1,4 +1,4 @@
-namespace Mastermind.Data
+namespace Mastermind.ColoursData
 {
     public enum Colours
     {

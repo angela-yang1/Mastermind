@@ -1,5 +1,5 @@
 using System;
-using Mastermind.Data;
+using Mastermind.ColoursData;
 
 namespace Mastermind
 {

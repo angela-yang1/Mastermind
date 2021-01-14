@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Mastermind;
-using Mastermind.Data;
+using Mastermind.ColoursData;
 using Xunit;
 
 namespace MastermindTests
@@ -18,7 +18,7 @@ namespace MastermindTests
             SetUpConsoleReadLineToStringReader(input);
             var userInput = new UserInput();
 
-            // Act
+            // Act - input parser, separating out responsibility
             var result = userInput.GetUserInput();
 
             // Assert

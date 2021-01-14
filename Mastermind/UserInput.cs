@@ -1,6 +1,6 @@
 using System;
-using Mastermind.Data;
 using Mastermind.Interfaces;
+using Mastermind.ColoursData;
 
 namespace Mastermind
 {
