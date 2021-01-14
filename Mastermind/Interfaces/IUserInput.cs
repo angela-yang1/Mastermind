@@ -4,6 +4,6 @@ namespace Mastermind.Interfaces
 {
     public interface IUserInput
     {
-        public Colours[] GetUserInput();
+        public string GetUserInput();
     }
 }

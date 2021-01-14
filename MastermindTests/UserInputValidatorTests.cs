@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mastermind;
@@ -19,15 +20,24 @@ namespace MastermindTests
             Assert.True(result);
         }
         
-        [Fact]
-        public void UserInput_ContainingLessThanFourItems_ReturnsFalse()
+        [Theory]
+        [InlineData(new[] { Colours.Red, Colours.Blue, Colours.Green })]
+        [InlineData(new[] { Colours.Purple, Colours.Green })]
+        [InlineData(new[] { Colours.Yellow })]
+        public void UserInputArray_ContainingLessThanFourItems_ThrowsException(Colours[] inputArray)
         {
             var inputValidator = new UserInputValidator();
-            var inputArray = new[] { Colours.Red, Colours.Blue, Colours.Green };
             
-            var result = inputValidator.ValidateUserInput(inputArray);
+            Assert.Throws<ArgumentException>(() => inputValidator.ValidateUserInput(inputArray));
+        }
+        
+        [Theory]
+        [InlineData(new[] { Colours.Red, Colours.Blue, Colours.Green, Colours.Blue, Colours.Purple, Colours.Orange })]
+        public void UserInputArray_ContainingMoreThanFourItems_ThrowsException(Colours[] inputArray)
+        {
+            var inputValidator = new UserInputValidator();
             
-            Assert.False(result);
+            Assert.Throws<ArgumentException>(() => inputValidator.ValidateUserInput(inputArray));
         }
     }
 }

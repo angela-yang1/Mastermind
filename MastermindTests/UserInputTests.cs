@@ -15,21 +15,13 @@ namespace MastermindTests
         public void UserInputString_ShouldConvertToEnumArray(string input, Colours[] expected)
         {
             // Arrange
-            SetUpConsoleReadLineToStringReader(input);
             var userInput = new UserInput();
 
-            // Act - input parser, separating out responsibility
-            var result = userInput.GetUserInput();
+            // Act
+            var result = userInput.ParseUserInput(input);
 
             // Assert
             Assert.Equal(expected, result);
-        }
-        
-        private static void SetUpConsoleReadLineToStringReader(string input)
-        {
-            var stringReader = new StringReader(input);
-            Console.Clear();
-            Console.SetIn(stringReader);
         }
     }
     

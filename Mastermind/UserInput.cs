@@ -6,16 +6,15 @@ namespace Mastermind
 {
     public class UserInput : IUserInput
     {
-        public Colours[] GetUserInput()
+        public string GetUserInput()
         {
             Console.WriteLine("\n Please enter your four guesses (separated by a comma):");
             var userInput = Console.ReadLine();
             
-            // only return after validating user input and converting string[] to enum[]
-            return ParseUserInput(userInput);
+            return userInput;
         }
 
-        private Colours[] ParseUserInput(string userInputToConvert)
+        public Colours[] ParseUserInput(string userInputToConvert)
         {
             // check there are 4 items
             // add user input to list then convert to array?
@@ -34,6 +33,7 @@ namespace Mastermind
                     Console.WriteLine("{0} is not a member of the Colours enum.", coloursStringArray[i]);
                 }
             }
+            // only return after validating user input and converting string[] to enum[]
             return enumArray;
         }
     }
