@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using Mastermind;
 using Mastermind.ColoursData;
 using Xunit;
@@ -18,7 +17,7 @@ namespace MastermindTests
             var userInput = new UserInput();
 
             // Act
-            var result = userInput.ParseUserInput(input);
+            var result = userInput.ParseUserInput1.ParseFromString(input);
 
             // Assert
             Assert.Equal(expected, result);

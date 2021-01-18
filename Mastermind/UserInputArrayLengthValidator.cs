@@ -5,16 +5,14 @@ namespace Mastermind
 {
     public class UserInputValidator
     {
-        public bool ValidateUserInput(Colours[] userInput)
+        public void ValidateUserInput(Colours[] userInput)
         {
             var arrayLength = IsArrayLengthFour(userInput);
 
             if (!arrayLength)
             {
-                throw new ArgumentException("Incorrect number of colours entered");
+                throw new ArgumentException($"Your guess should have 4 colours separated by comma. You have entered {userInput.Length}");
             }
-
-            return true;
         }
 
         private bool IsArrayLengthFour(Colours[] userInput)
