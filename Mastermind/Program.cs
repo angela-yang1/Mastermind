@@ -13,12 +13,14 @@ namespace Mastermind
             Console.WriteLine(string.Join(", ", computerColours));
             
             var userInput = new UserInput();
-            var test = userInput.GetUserInput();
-
-            foreach (var c in test)
-            {
-                Console.WriteLine(c.ToString());
-            }
+            var gameEngine = new GameEngine(userInput);
+            var userAnswer = gameEngine.GetUserAnswer();
+            //Console.WriteLine(userAnswer.ToString());
+            
+            // foreach (var c in test)
+            // {
+            //     Console.WriteLine(c.ToString());
+            // }
         }
     }
 }

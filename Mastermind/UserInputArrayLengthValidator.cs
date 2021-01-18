@@ -3,7 +3,7 @@ using Mastermind.ColoursData;
 
 namespace Mastermind
 {
-    public class UserInputValidator
+    public class UserInputArrayLengthValidator
     {
         public void ValidateUserInput(Colours[] userInput)
         {

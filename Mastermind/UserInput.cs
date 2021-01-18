@@ -1,6 +1,5 @@
 using System;
 using Mastermind.Interfaces;
-using Mastermind.ColoursData;
 
 namespace Mastermind
 {
@@ -8,33 +7,10 @@ namespace Mastermind
     {
         public string GetUserInput()
         {
-            Console.WriteLine("\n Please enter your four guesses (separated by a comma):");
+            Console.WriteLine("\nPlease enter your four guesses (separated by a comma):");
             var userInput = Console.ReadLine();
             
             return userInput;
-        }
-
-        public Colours[] ParseUserInput(string userInputToConvert)
-        {
-            // check there are 4 items
-            // add user input to list then convert to array?
-            var coloursStringArray = userInputToConvert.Split(", ");
-            
-            var enumArray = new Colours[coloursStringArray.Length];
-
-            for(var i = 0; i < coloursStringArray.Length; i++)
-            {
-                try {
-                    var enumColour = (Colours) Enum.Parse(typeof(Colours), coloursStringArray[i]);
-                    enumArray[i] = enumColour;
-                }
-                catch (ArgumentException) {
-                    // add errors to list - custom exception
-                    Console.WriteLine("{0} is not a member of the Colours enum.", coloursStringArray[i]);
-                }
-            }
-            // only return after validating user input and converting string[] to enum[]
-            return enumArray;
         }
     }
 }

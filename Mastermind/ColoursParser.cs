@@ -1,17 +1,20 @@
 using System;
+using System.Collections.Generic;
 using Mastermind.ColoursData;
 
 namespace Mastermind
 {
-    public class ParseUserInput
+    public static class ColoursParser
     {
-        public Colours[] ParseUserInput(string userInputToConvert)
+        public static Colours[] ParseFromString(string userInputToConvert)
         {
             // check there are 4 items
             // add user input to list then convert to array?
             var coloursStringArray = userInputToConvert.Split(", ");
             
             var enumArray = new Colours[coloursStringArray.Length];
+
+            var invalidColours = new List<string>();
 
             for(var i = 0; i < coloursStringArray.Length; i++)
             {
@@ -21,9 +24,15 @@ namespace Mastermind
                 }
                 catch (ArgumentException) {
                     // add errors to list - custom exception
-                    Console.WriteLine("{0} is not a member of the Colours enum.", coloursStringArray[i]);
+                    invalidColours.Add(coloursStringArray[i]);
                 }
             }
+
+            if (invalidColours.Count > 0)
+            {
+                throw new ArgumentException($"{String.Join(", ", invalidColours)} is not a valid colour.");
+            }
+            
             // only return after validating user input and converting string[] to enum[]
             return enumArray;
         }

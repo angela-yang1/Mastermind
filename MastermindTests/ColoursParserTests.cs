@@ -7,34 +7,47 @@ using Xunit;
 
 namespace MastermindTests
 {
-    public class UserInputTests
+    public class ColoursParserTests
     {
         [Theory]
-        [ClassData(typeof(UserInputTestData))]
-        public void UserInputString_ShouldConvertToEnumArray(string input, Colours[] expected)
+        [InlineData("Red, Blue, Orange, Yellow", new[] { Colours.Red, Colours.Blue, Colours.Orange, Colours.Yellow })]
+        public void UserInputString_ShouldConvertToEnumArrayTest(string input, Colours[] expected)
         {
             // Arrange
-            var userInput = new UserInput();
 
             // Act
-            var result = userInput.ParseUserInput1.ParseFromString(input);
+            var result = ColoursParser.ParseFromString(input);
 
             // Assert
             Assert.Equal(expected, result);
         }
-    }
-    
-    public class UserInputTestData : IEnumerable<object[]>
-    {
-        public IEnumerator<object[]> GetEnumerator()
-        {
-            yield return new object[]
-            {
-                "Red, Blue, Orange, Yellow", 
-                new[] { Colours.Red, Colours.Blue, Colours.Orange, Colours.Yellow }
-            };
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        
+    //     [Theory]
+    //     [ClassData(typeof(UserInputTestData))]
+    //     public void UserInputString_ShouldConvertToEnumArray(string input, Colours[] expected)
+    //     {
+    //         // Arrange
+    //
+    //         // Act
+    //         var result = ColoursParser.ParseFromString(input);
+    //
+    //         // Assert
+    //         Assert.Equal(expected, result);
+    //     }
+    //
+    // }
+    //
+    // public class UserInputTestData : IEnumerable<object[]>
+    // {
+    //     public IEnumerator<object[]> GetEnumerator()
+    //     {
+    //         yield return new object[]
+    //         {
+    //             "Red, Blue, Orange, Yellow", 
+    //             new[] { Colours.Red, Colours.Blue, Colours.Orange, Colours.Yellow }
+    //         };
+    //     }
+    //
+    //     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
