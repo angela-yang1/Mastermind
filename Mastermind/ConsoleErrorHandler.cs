@@ -3,9 +3,9 @@ using Mastermind.Interfaces;
 
 namespace Mastermind
 {
-    public class ErrorHandler : IErrorHandler
+    public class ConsoleErrorHandler : IErrorHandler
     {
-        public void DisplayErrorMessage(ArgumentException e)
+        public void DisplayErrorMessage(Exception e)
         {
             Console.WriteLine(e.Message);
         }

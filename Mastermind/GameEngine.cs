@@ -8,11 +8,13 @@ namespace Mastermind
     public class GameEngine
     {
         private readonly IUserInput _userInput;
+        private readonly IErrorHandler _consoleErrorHandler;
         private readonly UserInputArrayLengthValidator _userInputArrayLengthValidator;
 
-        public GameEngine(IUserInput userInput)
+        public GameEngine(IUserInput userInput, IErrorHandler consoleErrorHandler)
         {
             _userInput = userInput;
+            _consoleErrorHandler = consoleErrorHandler;
             _userInputArrayLengthValidator = new UserInputArrayLengthValidator();
         }
 
@@ -29,7 +31,7 @@ namespace Mastermind
                 }
                 catch(ArgumentException e)
                 {
-                    Console.WriteLine(e.Message);
+                    _consoleErrorHandler.DisplayErrorMessage(e);
                 }
             }
         }
