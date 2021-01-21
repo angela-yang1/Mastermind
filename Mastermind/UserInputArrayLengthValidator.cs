@@ -11,7 +11,7 @@ namespace Mastermind
 
             if (!arrayLength)
             {
-                throw new ArgumentException($"Your guess should have 4 colours separated by comma. You have entered {userInput.Length}");
+                throw new ArgumentException($"Error: you must pass 4 colours. You have entered {userInput.Length}");
             }
         }
 

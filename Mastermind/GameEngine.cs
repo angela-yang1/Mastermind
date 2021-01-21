@@ -7,6 +7,9 @@ namespace Mastermind
 {
     public class GameEngine
     {
+        // GameEngine output might not make sense
+        // GameEngine might change with the max 60 tries condition
+        
         private readonly IUserInput _userInput;
         private readonly IErrorHandler _consoleErrorHandler;
         private readonly UserInputArrayLengthValidator _userInputArrayLengthValidator;
