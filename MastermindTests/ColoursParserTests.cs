@@ -1,6 +1,6 @@
 using System;
 using Mastermind;
-using Mastermind.ColoursData;
+using Mastermind.Enums;
 using Xunit;
 
 namespace MastermindTests

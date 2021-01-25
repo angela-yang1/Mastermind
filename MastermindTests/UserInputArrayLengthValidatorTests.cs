@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mastermind;
-using Mastermind.ColoursData;
+using Mastermind.Enums;
 using Xunit;
 
 namespace MastermindTests

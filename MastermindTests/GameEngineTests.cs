@@ -1,6 +1,6 @@
 using System;
 using Mastermind;
-using Mastermind.ColoursData;
+using Mastermind.Enums;
 using Mastermind.Interfaces;
 using Moq;
 using Xunit;
@@ -36,7 +36,7 @@ namespace MastermindTests
             var result = gameEngine.GetUserAnswer();
         
             mockErrorHandler.Verify(m =>
-                m.DisplayErrorMessage(It.Is<Exception>(e => e.Message == "Pink is not a valid colour.")), Times.Once);
+                m.DisplayErrorMessage(It.Is<ArgumentException>(e => e.Message == "Pink is not a valid colour.")), Times.Once);
             Assert.Equal(new[] { Colours.Red, Colours.Blue, Colours.Yellow, Colours.Green }, result);
         }
     }

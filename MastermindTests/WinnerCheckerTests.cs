@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Mastermind;
+using Mastermind.Enums;
 using Xunit;
 
 namespace MastermindTests

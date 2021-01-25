@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Mastermind.ColoursData;
+using Mastermind.Enums;
 
 namespace Mastermind
 {

@@ -1,14 +1,13 @@
 using System;
-using System.ComponentModel;
-using Mastermind.ColoursData;
+using Mastermind.Enums;
 using Mastermind.Interfaces;
 
 namespace Mastermind
 {
-    public class GameEngine
+    public class GameEngine : IGameEngine
     {
-        // GameEngine output might not make sense
         // GameEngine might change with the max 60 tries condition
+        // What if user wants to quit the game?
         
         private readonly IUserInput _userInput;
         private readonly IErrorHandler _consoleErrorHandler;

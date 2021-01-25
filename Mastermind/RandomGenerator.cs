@@ -1,11 +1,11 @@
 using System;
-using Mastermind.ColoursData;
+using Mastermind.Enums;
 
 namespace Mastermind
 {
     public class RandomGenerator : IRandomGenerator
     {
-        public readonly Colours[] SelectedColours = new Colours[4];
+        private readonly Colours[] _selectedColours = new Colours[4];
 
         public Colours[] Generate()
         {
@@ -17,10 +17,10 @@ namespace Mastermind
             for (var i = 0; i < 4; i++)
             {
                 var randomChosenIndex = random.Next(0, enumValues.Length);
-                SelectedColours[i] = (Colours)enumValues.GetValue(randomChosenIndex);
+                _selectedColours[i] = (Colours)enumValues.GetValue(randomChosenIndex);
             }
 
-            return SelectedColours;
+            return _selectedColours;
         }
     }
 }

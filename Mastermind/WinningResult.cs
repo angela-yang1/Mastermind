@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
-using Mastermind.ColoursData;
 using System.Linq;
+using Mastermind.Enums;
 
 namespace Mastermind
 {
@@ -12,6 +13,7 @@ namespace Mastermind
             var guessesList = guesses.ToList();
             var selectedColoursList = selectedColours.ToList();
 
+            // black
             for (var i = guessesList.Count - 1; i >= 0; i--)
             {
                 if (guessesList[i] == selectedColoursList[i])
@@ -22,6 +24,7 @@ namespace Mastermind
                 }
             }
 
+            // white
             for (var i = guessesList.Count - 1; i >= 0; i--)
             {
                 if (selectedColoursList.Contains(guessesList[i]))
@@ -29,7 +32,8 @@ namespace Mastermind
                     result.Add(ResultColours.White);
                 }
             }
-            return result;
+            
+            return result.OrderBy(x => Guid.NewGuid()).ToList();;
         }
     }
 }
