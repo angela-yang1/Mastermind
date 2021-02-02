@@ -18,16 +18,36 @@ namespace MastermindTests
             Assert.Equal(2, result);
         }
         
-        // [Fact]
-        // public void WhenMaxGuessTriesReached_ReturnTrue()
-        // {
-        //     var turnCount = new TurnCount();
-        //     turnCount.NextTurn();
-        //     
-        //     var result = turnCount.HasMaxTriesBeenReached();
-        //     
-        //     Assert.True(result);
-        // }
+        [Fact]
+        public void NextTurn_ShouldIncrementGuessCountBy5()
+        {
+            var turnCount = new TurnCount();
+            turnCount.NextTurn();
+            turnCount.NextTurn();
+            turnCount.NextTurn();
+            turnCount.NextTurn();
+            turnCount.NextTurn();
+
+            var result = turnCount.Counter;
+            
+            Assert.Equal(6, result);
+        }
+        
+        [Fact]
+        public void WhenMaxGuessTriesReached_ReturnTrue()
+        {
+            var turnCount = new TurnCount();
+            //turnCount.NextTurn();
+
+            for (var i = 0; i <= Constants.MaxTries; i++)
+            {
+                turnCount.NextTurn();
+            }
+            
+            var result = turnCount.HasMaxTriesBeenReached();
+            
+            Assert.True(result);
+        }
         
         [Fact]
         public void WhenMaxGuessTriesNotReached_ReturnFalse()

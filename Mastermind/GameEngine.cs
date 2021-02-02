@@ -11,16 +11,12 @@ namespace Mastermind
         private readonly IInputReceiver _inputReceiver;
         private readonly IErrorHandler _consoleErrorHandler;
         private readonly InputArrayLengthValidator _inputArrayLengthValidator;
-        private readonly TurnCount _turnCount;
-        private readonly WinningResult _winningResult;
 
         public GameEngine(IInputReceiver inputReceiver, IErrorHandler consoleErrorHandler)
         {
             _inputReceiver = inputReceiver;
             _consoleErrorHandler = consoleErrorHandler;
             _inputArrayLengthValidator = new InputArrayLengthValidator();
-            _turnCount = new TurnCount();
-            _winningResult = new WinningResult();
         }
         
         public Colours[]? TakeATurn()
