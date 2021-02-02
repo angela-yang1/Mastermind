@@ -18,7 +18,7 @@ namespace Mastermind
             _gameEngine = gameEngine;
             _winnerChecker = new WinnerChecker();
             _winningResult = new WinningResult();
-            _turnCount = new TurnCount();
+            _turnCount = new TurnCount(Constants.MaxTries);
         }
         
         public bool HasAWinner { get; private set; }

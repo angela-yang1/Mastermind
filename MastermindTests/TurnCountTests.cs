@@ -10,7 +10,7 @@ namespace MastermindTests
         [Fact]
         public void NextTurn_ShouldIncrementGuessCountBy1()
         {
-            var turnCount = new TurnCount();
+            var turnCount = new TurnCount(Constants.MaxTries);
             turnCount.NextTurn();
 
             var result = turnCount.Counter;
@@ -21,7 +21,7 @@ namespace MastermindTests
         [Fact]
         public void NextTurn_ShouldIncrementGuessCountBy5()
         {
-            var turnCount = new TurnCount();
+            var turnCount = new TurnCount(Constants.MaxTries);
             turnCount.NextTurn();
             turnCount.NextTurn();
             turnCount.NextTurn();
@@ -36,14 +36,9 @@ namespace MastermindTests
         [Fact]
         public void WhenMaxGuessTriesReached_ReturnTrue()
         {
-            var turnCount = new TurnCount();
-            //turnCount.NextTurn();
+            var turnCount = new TurnCount(2);
+            turnCount.NextTurn();
 
-            for (var i = 0; i <= Constants.MaxTries; i++)
-            {
-                turnCount.NextTurn();
-            }
-            
             var result = turnCount.HasMaxTriesBeenReached();
             
             Assert.True(result);
@@ -52,7 +47,7 @@ namespace MastermindTests
         [Fact]
         public void WhenMaxGuessTriesNotReached_ReturnFalse()
         {
-            var turnCount = new TurnCount();
+            var turnCount = new TurnCount(Constants.MaxTries);
             turnCount.NextTurn();
             
             var result = turnCount.HasMaxTriesBeenReached();

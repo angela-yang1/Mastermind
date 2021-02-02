@@ -53,22 +53,21 @@ namespace MastermindTests
             Assert.True(result
                 .All(c => c == ResultColours.White) && result.Count == 2);
         }
-        
-        // always checks & adds black to first before white
-        // refactor to check for contains 2x black and 1x white
+     
         [Fact]
         public void GivenDuplicateColoursWithIncorrectIndex_ShouldReturnOneWhiteAndOneBlackValues()
         {
             var winningCondition = new WinningResult();
             var userGuesses = new[] 
                 { Colours.Blue, Colours.Blue, Colours.Green, Colours.Blue };
-            var actual = new List<ResultColours> 
-                { ResultColours.Black, ResultColours.Black, ResultColours.White };
             winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
 
             var result = winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+            var blackCount = result.Count(c => c == ResultColours.Black);
+            var whiteCount = result.Count(c => c == ResultColours.White);
             
-            Assert.Equal(result, actual);
+            Assert.Equal(2,blackCount);
+            Assert.Equal(1,whiteCount);
         }
     }
 }
