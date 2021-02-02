@@ -8,17 +8,17 @@ namespace Mastermind
 {
     public class GameEngine : IGameEngine
     {
-        private readonly IUserInput _userInput;
+        private readonly IInputReceiver _inputReceiver;
         private readonly IErrorHandler _consoleErrorHandler;
-        private readonly UserInputArrayLengthValidator _userInputArrayLengthValidator;
+        private readonly InputArrayLengthValidator _inputArrayLengthValidator;
         private readonly TurnCount _turnCount;
         private readonly WinningResult _winningResult;
 
-        public GameEngine(IUserInput userInput, IErrorHandler consoleErrorHandler)
+        public GameEngine(IInputReceiver inputReceiver, IErrorHandler consoleErrorHandler)
         {
-            _userInput = userInput;
+            _inputReceiver = inputReceiver;
             _consoleErrorHandler = consoleErrorHandler;
-            _userInputArrayLengthValidator = new UserInputArrayLengthValidator();
+            _inputArrayLengthValidator = new InputArrayLengthValidator();
             _turnCount = new TurnCount();
             _winningResult = new WinningResult();
         }
@@ -29,7 +29,7 @@ namespace Mastermind
             // take in user input as parameter and remove while loop?
             while (true)
             {
-                var userInput = _userInput.GetUserInput();
+                var userInput = _inputReceiver.GetUserInput();
                 
                 if (userInput == UserOptions.Quit.ToString())
                 {
@@ -38,8 +38,8 @@ namespace Mastermind
 
                 try
                 {
-                    var userAnswer = ColoursParser.ParseFromString(userInput);
-                    _userInputArrayLengthValidator.ValidateUserInput(userAnswer);
+                    var userAnswer = InputColoursParser.ParseFromString(userInput);
+                    _inputArrayLengthValidator.ValidateUserInput(userAnswer);
 
                     return userAnswer;
                 }

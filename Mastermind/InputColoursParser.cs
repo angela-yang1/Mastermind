@@ -4,7 +4,7 @@ using Mastermind.Enums;
 
 namespace Mastermind
 {
-    public static class ColoursParser
+    public static class InputColoursParser
     {
         public static Colours[] ParseFromString(string userInputToConvert)
         {

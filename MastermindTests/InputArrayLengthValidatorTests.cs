@@ -7,12 +7,12 @@ using Xunit;
 
 namespace MastermindTests
 {
-    public class UserInputArrayLengthValidatorTests
+    public class InputArrayLengthValidatorTests
     {
         [Fact]
         public void UserInput_ShouldReturnArray_WithFourItems()
         {
-            var inputValidator = new UserInputArrayLengthValidator();
+            var inputValidator = new InputArrayLengthValidator();
             var inputArray = new[] { Colours.Red, Colours.Blue, Colours.Green, Colours.Yellow };
             inputValidator.ValidateUserInput(inputArray);
 
@@ -27,7 +27,7 @@ namespace MastermindTests
         [InlineData(new[] { Colours.Yellow })]
         public void UserInputArray_ContainingLessThanFourItems_ThrowsException(Colours[] inputArray)
         {
-            var inputValidator = new UserInputArrayLengthValidator();
+            var inputValidator = new InputArrayLengthValidator();
             
             Assert.Throws<ArgumentException>(() => inputValidator.ValidateUserInput(inputArray));
         }
@@ -36,7 +36,7 @@ namespace MastermindTests
         [InlineData(new[] { Colours.Red, Colours.Blue, Colours.Green, Colours.Blue, Colours.Purple, Colours.Orange })]
         public void UserInputArray_ContainingMoreThanFourItems_ThrowsException(Colours[] inputArray)
         {
-            var inputValidator = new UserInputArrayLengthValidator();
+            var inputValidator = new InputArrayLengthValidator();
             
             Assert.Throws<ArgumentException>(() => inputValidator.ValidateUserInput(inputArray));
         }

@@ -13,7 +13,7 @@ namespace MastermindTests
         [Fact]
         public void GetUserAnswer_ValidatesAndReturnsAn_ColoursArrayWithFourItems()
         {
-            var mockUserInput = new Mock<IUserInput>();
+            var mockUserInput = new Mock<IInputReceiver>();
             var mockErrorHandler = new Mock<IErrorHandler>();
             mockUserInput.Setup(i => i.GetUserInput())
                 .Returns("Red, Blue, Yellow, Green");
@@ -28,7 +28,7 @@ namespace MastermindTests
         [Fact]
         public void InvalidUserAnswer_ShouldCallDisplayExceptionMessage()
         {
-            var mockUserInput = new Mock<IUserInput>();
+            var mockUserInput = new Mock<IInputReceiver>();
             var mockErrorHandler = new Mock<IErrorHandler>();
             
             mockUserInput.SetupSequence(i => i.GetUserInput())

@@ -3,7 +3,7 @@ using Mastermind.Enums;
 
 namespace Mastermind
 {
-    public class UserInputArrayLengthValidator
+    public class InputArrayLengthValidator
     {
         public void ValidateUserInput(Colours[] userInput)
         {

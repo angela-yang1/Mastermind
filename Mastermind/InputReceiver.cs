@@ -4,7 +4,7 @@ using Mastermind.Interfaces;
 
 namespace Mastermind
 {
-    public class UserInput : IUserInput
+    public class InputReceiver : IInputReceiver
     {
         public string GetUserInput()
         {

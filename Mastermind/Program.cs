@@ -7,7 +7,7 @@ namespace Mastermind
         static void Main(string[] args)
         {
             var randomGen = new RandomGenerator();
-            var userInput = new UserInput();
+            var userInput = new InputReceiver();
             var errorHandler = new ConsoleErrorHandler();
             var gameEngine = new GameEngine(userInput, errorHandler);
             

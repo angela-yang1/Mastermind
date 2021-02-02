@@ -5,7 +5,7 @@ using Xunit;
 
 namespace MastermindTests
 {
-    public class ColoursParserTests
+    public class InputColoursParserTests
     {
         [Theory]
         [InlineData("Red, Blue, Orange, Yellow", new[] { Colours.Red, Colours.Blue, Colours.Orange, Colours.Yellow })]
@@ -13,7 +13,7 @@ namespace MastermindTests
         [InlineData("Blue, Blue, Blue, Blue", new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue })]
         public void UserInputString_ShouldConvertToEnumArray(string input, Colours[] expected)
         {
-            var result = ColoursParser.ParseFromString(input);
+            var result = InputColoursParser.ParseFromString(input);
 
             Assert.Equal(expected, result);
         }
@@ -25,7 +25,7 @@ namespace MastermindTests
         [InlineData(" , , , ")]
         public void UserInputWithInvalidString_ShouldThrowException(string input)
         {
-            Assert.Throws<ArgumentException>(() => ColoursParser.ParseFromString(input));
+            Assert.Throws<ArgumentException>(() => InputColoursParser.ParseFromString(input));
         }
     }
 }

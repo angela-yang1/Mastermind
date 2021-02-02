@@ -1,6 +1,6 @@
 namespace Mastermind.Interfaces
 {
-    public interface IUserInput
+    public interface IInputReceiver
     {
         public string GetUserInput();
     }
