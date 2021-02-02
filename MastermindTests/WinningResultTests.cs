@@ -55,6 +55,7 @@ namespace MastermindTests
         }
         
         // always checks & adds black to first before white
+        // refactor to check for contains 2x black and 1x white
         [Fact]
         public void GivenDuplicateColoursWithIncorrectIndex_ShouldReturnOneWhiteAndOneBlackValues()
         {
