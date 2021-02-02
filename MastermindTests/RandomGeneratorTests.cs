@@ -1,5 +1,6 @@
 using System;
 using Mastermind;
+using Mastermind.Enums;
 using Xunit;
 
 namespace MastermindTests
@@ -14,6 +15,16 @@ namespace MastermindTests
             var result = randomGenerator.Generate();
 
             Assert.Equal(4, result.Length);
+        }
+        
+        [Fact]
+        public void GenerateFourRandomColours_ShouldContainColourValues()
+        {
+            var randomGenerator = new RandomGenerator();
+
+            var result = randomGenerator.Generate();
+
+            Assert.IsType<Colours[]>(result);
         }
     }
 }

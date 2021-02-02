@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Mastermind;
 using Mastermind.Enums;
 using Mastermind.Interfaces;
@@ -12,12 +13,13 @@ namespace MastermindTests
         [Fact]
         public void GetUserAnswer_ValidatesAndReturnsAn_ColoursArrayWithFourItems()
         {
-            var mock = new Mock<IUserInput>();
+            var mockUserInput = new Mock<IUserInput>();
             var mockErrorHandler = new Mock<IErrorHandler>();
-            mock.Setup(i => i.GetUserInput()).Returns("Red, Blue, Yellow, Green");
-        
-            var gameEngine = new GameEngine(mock.Object, mockErrorHandler.Object);
-            var result = gameEngine.GetUserAnswer();
+            mockUserInput.Setup(i => i.GetUserInput())
+                .Returns("Red, Blue, Yellow, Green");
+            
+            var gameEngine = new GameEngine(mockUserInput.Object, mockErrorHandler.Object);
+            var result = gameEngine.TakeATurn();
             
             mockErrorHandler.Verify(e => e.DisplayErrorMessage(It.IsAny<Exception>()), Times.Never);
             Assert.Equal(new[] { Colours.Red, Colours.Blue, Colours.Yellow, Colours.Green }, result);
@@ -26,14 +28,15 @@ namespace MastermindTests
         [Fact]
         public void InvalidUserAnswer_ShouldCallDisplayExceptionMessage()
         {
-            var mock = new Mock<IUserInput>();
+            var mockUserInput = new Mock<IUserInput>();
             var mockErrorHandler = new Mock<IErrorHandler>();
-            mock.SetupSequence(i => i.GetUserInput())
+            
+            mockUserInput.SetupSequence(i => i.GetUserInput())
                 .Returns("Pink, Blue, Yellow, Green")
                 .Returns("Red, Blue, Yellow, Green");
         
-            var gameEngine = new GameEngine(mock.Object, mockErrorHandler.Object);
-            var result = gameEngine.GetUserAnswer();
+            var gameEngine = new GameEngine(mockUserInput.Object, mockErrorHandler.Object);
+            var result = gameEngine.TakeATurn();
         
             mockErrorHandler.Verify(m =>
                 m.DisplayErrorMessage(It.Is<ArgumentException>(e => e.Message == "Pink is not a valid colour.")), Times.Once);

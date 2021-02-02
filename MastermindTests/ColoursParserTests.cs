@@ -10,6 +10,7 @@ namespace MastermindTests
         [Theory]
         [InlineData("Red, Blue, Orange, Yellow", new[] { Colours.Red, Colours.Blue, Colours.Orange, Colours.Yellow })]
         [InlineData("Blue, Blue, Purple, Green", new[] { Colours.Blue, Colours.Blue, Colours.Purple, Colours.Green })]
+        [InlineData("Blue, Blue, Blue, Blue", new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue })]
         public void UserInputString_ShouldConvertToEnumArray(string input, Colours[] expected)
         {
             var result = ColoursParser.ParseFromString(input);

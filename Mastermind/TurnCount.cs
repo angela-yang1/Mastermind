@@ -4,9 +4,9 @@ namespace Mastermind
     {
         private readonly int _maxTries;
         
-        public TurnCount(int maxTries)
+        public TurnCount()
         {
-            _maxTries = maxTries;
+            _maxTries = Constants.MaxTries;
             Counter = 1;
         }
         

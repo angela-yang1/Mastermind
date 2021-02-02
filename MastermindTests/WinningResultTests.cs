@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mastermind;
 using Mastermind.Enums;
 using Xunit;
@@ -10,54 +11,50 @@ namespace MastermindTests
     {
         private readonly Colours[] _masterSelectedColours = 
             { Colours.Blue, Colours.Green, Colours.Yellow, Colours.Blue };
-        
-       
+
         [Fact]
-        public void GivenCorrectColourAndIndex_ShouldReturnFourBlackValues()
+        public void GivenCorrectColourAndIndex_ShouldReturnTrue_ForFourBlackValues()
         {
             var winningCondition = new WinningResult();
             var userGuesses = new[] 
                 { Colours.Blue, Colours.Green, Colours.Yellow, Colours.Blue };
-            var actual = new List<ResultColours> 
-                { ResultColours.Black, ResultColours.Black, ResultColours.Black, ResultColours.Black };
             winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
 
             var result = winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
-            
-            Assert.Equal(result, actual);
+                
+            Assert.True(result
+                .All(c => c == ResultColours.Black) && result.Count == 4);
         }
         
         [Fact]
-        public void GivenTwoCorrectColourAndIndex_ShouldReturnTwoBlackValues()
+        public void GivenTwoCorrectColourAndIndex_ShouldReturnTrue_ForTwoBlackValues()
         {
             var winningCondition = new WinningResult();
             var userGuesses = new[] 
                 { Colours.Blue, Colours.Green, Colours.Red, Colours.Orange };
-            var actual = new List<ResultColours> 
-                { ResultColours.Black, ResultColours.Black };
             winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
-
-            var result = winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
             
-            Assert.Equal(result, actual);
+            var result = winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+
+            Assert.True(result
+                .All(c => c == ResultColours.Black) && result.Count == 2);
         }
         
         [Fact]
-        public void GivenTwoCorrectColoursWithIncorrectIndex_ShouldReturnTwoWhiteValues()
+        public void GivenTwoCorrectColoursWithIncorrectIndex_ShouldReturnTrue_ForTwoWhiteValues()
         {
             var winningCondition = new WinningResult();
             var userGuesses = new[] 
                 { Colours.Red, Colours.Blue, Colours.Green, Colours.Orange };
-            var actual = new List<ResultColours> 
-                { ResultColours.White, ResultColours.White };
             winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
 
             var result = winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
             
-            Assert.Equal(result, actual);
+            Assert.True(result
+                .All(c => c == ResultColours.White) && result.Count == 2);
         }
         
-        // always checks  & adds black to first before white
+        // always checks & adds black to first before white
         [Fact]
         public void GivenDuplicateColoursWithIncorrectIndex_ShouldReturnOneWhiteAndOneBlackValues()
         {

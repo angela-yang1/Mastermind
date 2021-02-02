@@ -4,6 +4,6 @@ namespace Mastermind.Interfaces
 {
     public interface IGameEngine
     {
-        public Colours[] GetUserAnswer();
+        public Colours[] TakeATurn();
     }
 }

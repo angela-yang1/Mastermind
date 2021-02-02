@@ -1,4 +1,5 @@
 using System;
+using Mastermind.Enums;
 using Mastermind.Interfaces;
 
 namespace Mastermind
@@ -17,16 +18,15 @@ namespace Mastermind
             _gameEngine = gameEngine;
             _winnerChecker = new WinnerChecker();
             _winningResult = new WinningResult();
-            _turnCount = new TurnCount(60);
+            _turnCount = new TurnCount();
         }
         
         public bool HasAWinner { get; private set; }
         
-        // mock up classes - test the loop runs as it should
-        // integration test (no mocks) - run Mastermind, assert on string etc
+        
         public void Run()
         {
-            Console.WriteLine("Welcome to Mastermind");
+            DisplayMessage.Welcome();
 
             HasAWinner = false;
             
@@ -37,28 +37,60 @@ namespace Mastermind
             // loop until user wins or reaches max 60 guesses
             while (true)
             {
-                // get validated input (lowercase/uppercase as well)
-                var userAnswer = _gameEngine.GetUserAnswer();
+                // get validated input
+                var userAnswer = _gameEngine.TakeATurn();
+                
+                // if user wants to quit
+                if (QuitApplication(userAnswer)) 
+                    break;
+                
+                // check for matching colours (output: black/white)
                 var guessResult = _winningResult.CreateWinningResult(userAnswer, masterColours);
 
-                // check against guess checker
-                HasAWinner = _winnerChecker.HasUserWon(guessResult);
-                Console.WriteLine($"Guess {_turnCount.Counter} result is: {string.Join(", ", guessResult)}");
-
-                if (HasAWinner)
+                // check for any matches
+                if (guessResult.Count != 0)
                 {
-                    Console.WriteLine("\nYou've won");
-                    break;
+                    // check against guess checker
+                    HasAWinner = _winnerChecker.HasUserWon(guessResult);
+                    Console.WriteLine($"\nGuess {_turnCount.Counter} result is: {string.Join(", ", guessResult)}");
                 }
-
-                if (_turnCount.HasMaxTriesBeenReached())
+                else
                 {
-                    Console.WriteLine("You lost");
-                    break;
+                    DisplayMessage.NoColourMatch();
                 }
                 
-                _turnCount.NextTurn();
+                if (IsThereAWinner()) 
+                    break;
+
+                if (MaxTriesReached()) 
+                    break;
             }
+        }
+
+        private bool QuitApplication(Colours[] userAnswer)
+        {
+            if (userAnswer != null) return false;
+            DisplayMessage.Quit();
+            return true;
+        }
+
+        private bool MaxTriesReached()
+        {
+            if (_turnCount.HasMaxTriesBeenReached())
+            {
+                DisplayMessage.MaxGuesses();
+                return true;
+            }
+
+            _turnCount.NextTurn();
+            return false;
+        }
+
+        private bool IsThereAWinner()
+        {
+            if (!HasAWinner) return false;
+            DisplayMessage.Win();
+            return true;
         }
     }
 }

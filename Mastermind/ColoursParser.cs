@@ -8,11 +8,9 @@ namespace Mastermind
     {
         public static Colours[] ParseFromString(string userInputToConvert)
         {
-            // check there are 4 items
-            // add user input to list then convert to array?
             var coloursStringArray = userInputToConvert.Split(", ");
             
-            var enumArray = new Colours[coloursStringArray.Length];
+            var enumArray = new Colours[Constants.ArrayLength];
 
             var invalidColours = new List<string>();
 
