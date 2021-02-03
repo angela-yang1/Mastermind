@@ -5,6 +5,13 @@ namespace Mastermind
 {
     public class InputArrayLengthValidator
     {
+        private readonly int _userInputLength;
+
+        public InputArrayLengthValidator(int userInputLength)
+        {
+            _userInputLength = userInputLength;
+        }
+
         public void ValidateUserInput(Colours[] userInput)
         {
             var arrayLength = IsArrayLengthFour(userInput);
@@ -18,7 +25,7 @@ namespace Mastermind
         private bool IsArrayLengthFour(Colours[] userInput)
         {
             // return void and throw exception?
-            const int arrayLength = 4;
+            var arrayLength = _userInputLength;
 
             return userInput.Length == arrayLength;
         }
