@@ -1,6 +1,6 @@
 namespace Mastermind.Enums
 {
-    public enum Colours
+    public enum Colour
     {
         Red,
         Blue,
@@ -9,7 +9,4 @@ namespace Mastermind.Enums
         Purple,
         Yellow
     }
-
-    // make number 4 constant instead
-    // parse don't validate
 }

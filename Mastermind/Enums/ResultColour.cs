@@ -1,6 +1,6 @@
 namespace Mastermind.Enums
 {
-    public enum ResultColours
+    public enum ResultColour
     {
         Black,
         White

@@ -1,6 +1,6 @@
 namespace Mastermind.Enums
 {
-    public enum UserOptions
+    public enum UserOption
     {
         Quit
     }
