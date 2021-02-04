@@ -1,9 +1,10 @@
+using BCL;
 using Mastermind.Enums;
 
 namespace Mastermind.Interfaces
 {
     public interface IGameEngine
     {
-        public Colours[] TakeATurn();
+        public Either<Colour[], UserOption> TakeATurn();
     }
 }

@@ -4,11 +4,11 @@ using Mastermind.Interfaces;
 
 namespace Mastermind
 {
-    public class RandomGenerator : IRandomGenerator
+    public class RandomColourGenerator : IRandomGenerator
     {
         private readonly Colour[] _selectedColours;
 
-        public RandomGenerator(int numOfColours)
+        public RandomColourGenerator(int numOfColours)
         {
             _selectedColours = new Colour[numOfColours];
         }

@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
+using Mastermind.Enums;
+using Mastermind.Interfaces;
 
 namespace Mastermind
 {
-    public static class DisplayMessage
+    public class DisplayMessage : IDisplayMessage
     {
-        public static void Welcome()
+        public void Welcome()
         {
             Console.WriteLine("Welcome to Mastermind! \n");
             Console.WriteLine("Here are your available colours:");
@@ -40,29 +43,29 @@ namespace Mastermind
             Console.ResetColor();
         }
 
-        public static void Win()
+        public void Win()
         {
             Console.WriteLine("You've won!");
         }
 
-        public static void Lose()
-        {
-            Console.WriteLine("You've lost!");
-        }
-
-        public static void NoColourMatch()
+        public void NoColourMatch()
         {
             Console.WriteLine("\nNone of your guesses matched the colours. Please try again");
         }
         
-        public static void MaxGuesses()
+        public void MaxGuesses()
         {
             Console.WriteLine("Game over! You've reached the maximum guesses of 60");
         }
         
-        public static void Quit()
+        public void Quit()
         {
             Console.WriteLine("\nYou've quit the game");
+        }
+
+        public void TurnCounter(int turnCount, List<ResultColour> guessResult)
+        {
+            Console.WriteLine($"\nGuess {turnCount} result is: {string.Join(", ", guessResult)}");
         }
     }
 }

@@ -8,13 +8,13 @@ namespace MastermindTests
     public class InputColoursParserTests
     {
         [Theory]
-        [InlineData("Red, Blue, Orange, Yellow", new[] { Colours.Red, Colours.Blue, Colours.Orange, Colours.Yellow })]
-        [InlineData("Blue, Blue, Purple, Green", new[] { Colours.Blue, Colours.Blue, Colours.Purple, Colours.Green })]
-        [InlineData("Blue, Blue, Blue, Blue", new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue })]
-        [InlineData("blue, blue, blue, blue", new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue })]
-        [InlineData("Red, yellow, blue, Purple", new[] { Colours.Red, Colours.Yellow, Colours.Blue, Colours.Purple})]
-        [InlineData("yellow, Green, blue, Blue", new[] { Colours.Yellow, Colours.Green, Colours.Blue, Colours.Blue})]
-        public void UserInputString_ShouldConvertToEnumArray(string input, Colours[] expected)
+        [InlineData("Red, Blue, Orange, Yellow", new[] { Colour.Red, Colour.Blue, Colour.Orange, Colour.Yellow })]
+        [InlineData("Blue, Blue, Purple, Green", new[] { Colour.Blue, Colour.Blue, Colour.Purple, Colour.Green })]
+        [InlineData("Blue, Blue, Blue, Blue", new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue })]
+        [InlineData("blue, blue, blue, blue", new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue })]
+        [InlineData("Red, yellow, blue, Purple", new[] { Colour.Red, Colour.Yellow, Colour.Blue, Colour.Purple})]
+        [InlineData("yellow, Green, blue, Blue", new[] { Colour.Yellow, Colour.Green, Colour.Blue, Colour.Blue})]
+        public void UserInputString_ShouldConvertToEnumArray(string input, Colour[] expected)
         {
             var result = InputColoursParser.ParseFromString(input);
 

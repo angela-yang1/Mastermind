@@ -7,18 +7,18 @@ namespace Mastermind
 {
     public static class InputColoursParser
     {
-        public static Colours[] ParseFromString(string userInputToConvert)
+        public static Colour[] ParseFromString(string userInputToConvert)
         {
             var coloursStringArray = userInputToConvert.Split(", ");
             
-            var enumArray = new Colours[coloursStringArray.Length];
+            var enumArray = new Colour[coloursStringArray.Length];
 
             var invalidColours = new List<string>();
 
             for(var i = 0; i < coloursStringArray.Length; i++)
             {
                 try {
-                    var enumColour = (Colours) Enum.Parse(typeof(Colours), StringToTitleCase(coloursStringArray[i]));
+                    var enumColour = (Colour) Enum.Parse(typeof(Colour), StringToTitleCase(coloursStringArray[i]));
                     enumArray[i] = enumColour;
                 }
                 catch (ArgumentException) {
@@ -37,14 +37,10 @@ namespace Mastermind
             return enumArray;
         }
         
+        // move into own class to use in GameEngine
         private static string StringToTitleCase(string userInput)
         {
-            // check ToLower
-            if (userInput != null)
-            {
-                userInput = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userInput);
-            }
-
+            userInput = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userInput);
             return userInput;
         }
     }

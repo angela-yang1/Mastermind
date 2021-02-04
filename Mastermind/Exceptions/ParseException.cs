@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mastermind
+namespace Mastermind.Exceptions
 {
     public class ParseException : Exception
     {

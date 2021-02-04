@@ -5,4 +5,9 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FIGlet.Net" Version="1.1.2" />
+      <PackageReference Include="Masb.Either" Version="0.2.0" />
+    </ItemGroup>
+
 </Project>

@@ -5,27 +5,27 @@ namespace Mastermind
 {
     public class InputArrayLengthValidator
     {
-        private readonly int _userInputLength;
+        private readonly int _numberOfColours;
 
-        public InputArrayLengthValidator(int userInputLength)
+        public InputArrayLengthValidator(int numberOfColours)
         {
-            _userInputLength = userInputLength;
+            _numberOfColours = numberOfColours;
         }
 
-        public void ValidateUserInput(Colours[] userInput)
+        public void ValidateUserInput(Colour[] userInput)
         {
-            var arrayLength = IsArrayLengthFour(userInput);
+            var isCorrectLength = IsArrayLengthCorrect(userInput);
 
-            if (!arrayLength)
+            if (!isCorrectLength)
             {
-                throw new ArgumentException($"Error: You must pass 4 colours. You have entered {userInput.Length}");
+                throw new ArgumentException($"Error: You must pass {_numberOfColours} colours. You have entered {userInput.Length}");
             }
         }
 
-        private bool IsArrayLengthFour(Colours[] userInput)
+        private bool IsArrayLengthCorrect(Colour[] userInput)
         {
             // return void and throw exception?
-            var arrayLength = _userInputLength;
+            var arrayLength = _numberOfColours;
 
             return userInput.Length == arrayLength;
         }

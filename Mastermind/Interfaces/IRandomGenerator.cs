@@ -1,10 +1,9 @@
-using Mastermind;
 using Mastermind.Enums;
 
-namespace Mastermind
+namespace Mastermind.Interfaces
 {
     public interface IRandomGenerator
     {
-        public Colours[] Generate();
+        public Colour[] Generate();
     }
 }

@@ -13,7 +13,7 @@ namespace MastermindTests
         public void UserInput_ShouldReturnArray_WithFourItems()
         {
             var inputValidator = new InputArrayLengthValidator(4);
-            var inputArray = new[] { Colours.Red, Colours.Blue, Colours.Green, Colours.Yellow };
+            var inputArray = new[] { Colour.Red, Colour.Blue, Colour.Green, Colour.Yellow };
             inputValidator.ValidateUserInput(inputArray);
 
             var result = inputArray.Length;
@@ -22,10 +22,10 @@ namespace MastermindTests
         }
         
         [Theory]
-        [InlineData(new[] { Colours.Red, Colours.Blue, Colours.Green })]
-        [InlineData(new[] { Colours.Purple, Colours.Green })]
-        [InlineData(new[] { Colours.Yellow })]
-        public void UserInputArray_ContainingLessThanFourItems_ThrowsException(Colours[] inputArray)
+        [InlineData(new[] { Colour.Red, Colour.Blue, Colour.Green })]
+        [InlineData(new[] { Colour.Purple, Colour.Green })]
+        [InlineData(new[] { Colour.Yellow })]
+        public void UserInputArray_ContainingLessThanFourItems_ThrowsException(Colour[] inputArray)
         {
             var inputValidator = new InputArrayLengthValidator(4);
             
@@ -33,8 +33,8 @@ namespace MastermindTests
         }
         
         [Theory]
-        [InlineData(new[] { Colours.Red, Colours.Blue, Colours.Green, Colours.Blue, Colours.Purple, Colours.Orange })]
-        public void UserInputArray_ContainingMoreThanFourItems_ThrowsException(Colours[] inputArray)
+        [InlineData(new[] { Colour.Red, Colour.Blue, Colour.Green, Colour.Blue, Colour.Purple, Colour.Orange })]
+        public void UserInputArray_ContainingMoreThanFourItems_ThrowsException(Colour[] inputArray)
         {
             var inputValidator = new InputArrayLengthValidator(4);
             
