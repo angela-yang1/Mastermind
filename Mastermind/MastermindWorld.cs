@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using Mastermind.Enums;
 using Mastermind.Interfaces;
 
@@ -8,16 +10,16 @@ namespace Mastermind
     {
         private readonly IRandomGenerator _randomGenerator;
         private readonly IGameEngine _gameEngine;
-        private readonly WinnerChecker _winnerChecker;
-        private readonly WinningResult _winningResult;
+        private readonly IDisplayMessage _displayMessage;
+        private readonly ResultOutput _resultOutput;
         private readonly TurnCount _turnCount;
 
-        public MastermindWorld(IRandomGenerator randomGenerator, IGameEngine gameEngine)
+        public MastermindWorld(IRandomGenerator randomGenerator, IGameEngine gameEngine, IDisplayMessage displayMessage)
         {
             _randomGenerator = randomGenerator;
             _gameEngine = gameEngine;
-            _winnerChecker = new WinnerChecker();
-            _winningResult = new WinningResult();
+            _displayMessage = displayMessage;
+            _resultOutput = new ResultOutput();
             _turnCount = new TurnCount(Constants.MaxTries);
         }
         
@@ -26,7 +28,7 @@ namespace Mastermind
         
         public void Run()
         {
-            DisplayMessage.Welcome();
+            _displayMessage.Welcome();
 
             HasAWinner = false;
             
@@ -35,61 +37,63 @@ namespace Mastermind
             Console.WriteLine(string.Join(", ", masterColours));
 
             // loop until user wins or reaches max 60 guesses
+            // do while loop??
             while (true)
             {
                 // get validated input
                 var userAnswer = _gameEngine.TakeATurn();
+
+                //user selected menu option
+                if (userAnswer.GetSelectedAlternative() != 1)
+                {
+                    //quit
+                    var userSelectedOption = userAnswer.Value2;
+                    if (userSelectedOption == UserOption.Quit)
+                    {
+                        _displayMessage.Quit();
+                        break;
+                    }
+                }
                 
-                // if user wants to quit
-                if (QuitApplication(userAnswer)) 
-                    break;
-                
+                var userSelectedColours = userAnswer.Value1;
+
                 // check for matching colours (output: black/white)
-                var guessResult = _winningResult.CreateWinningResult(userAnswer, masterColours);
+                var outputResult = _resultOutput.CreateWinningResult(userSelectedColours, masterColours);
 
                 // check for any matches
-                if (guessResult.Count != 0)
+                if (outputResult.Count != 0)
                 {
                     // check against guess checker
-                    HasAWinner = _winnerChecker.HasUserWon(guessResult);
-                    Console.WriteLine($"\nGuess {_turnCount.Counter} result is: {string.Join(", ", guessResult)}");
+                    HasAWinner = WinnerChecker.HasUserWon(outputResult);
+                    _displayMessage.TurnCounter(_turnCount.Counter, outputResult);
                 }
                 else
                 {
-                    DisplayMessage.NoColourMatch();
+                    _displayMessage.NoColourMatch();
                 }
                 
                 if (IsThereAWinner()) 
                     break;
 
+                
                 if (MaxTriesReached()) 
                     break;
+                
+                _turnCount.NextTurn();
             }
-        }
-
-        private bool QuitApplication(Colours[] userAnswer)
-        {
-            if (userAnswer != null) return false;
-            DisplayMessage.Quit();
-            return true;
         }
 
         private bool MaxTriesReached()
         {
-            if (_turnCount.HasMaxTriesBeenReached())
-            {
-                DisplayMessage.MaxGuesses();
-                return true;
-            }
-
-            _turnCount.NextTurn();
-            return false;
+            if (!_turnCount.HasMaxTriesBeenReached()) return false;
+            _displayMessage.MaxGuesses();
+            return true;
         }
 
         private bool IsThereAWinner()
         {
             if (!HasAWinner) return false;
-            DisplayMessage.Win();
+            _displayMessage.Win();
             return true;
         }
     }

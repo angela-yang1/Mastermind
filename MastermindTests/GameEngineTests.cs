@@ -22,7 +22,7 @@ namespace MastermindTests
             var result = gameEngine.TakeATurn();
             
             mockErrorHandler.Verify(e => e.DisplayErrorMessage(It.IsAny<Exception>()), Times.Never);
-            Assert.Equal(new[] { Colours.Red, Colours.Blue, Colours.Yellow, Colours.Green }, result);
+            Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
         }
         
         [Fact]
@@ -40,7 +40,7 @@ namespace MastermindTests
         
             mockErrorHandler.Verify(m =>
                 m.DisplayErrorMessage(It.Is<ArgumentException>(e => e.Message == "Pink is not a valid colour.")), Times.Once);
-            Assert.Equal(new[] { Colours.Red, Colours.Blue, Colours.Yellow, Colours.Green }, result);
+            Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
         }
     }
 }

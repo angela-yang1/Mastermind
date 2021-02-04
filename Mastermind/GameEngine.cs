@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using BCL;
 using Mastermind.Enums;
 using Mastermind.Interfaces;
 
@@ -16,27 +17,29 @@ namespace Mastermind
         {
             _inputReceiver = inputReceiver;
             _consoleErrorHandler = consoleErrorHandler;
-            _inputArrayLengthValidator = new InputArrayLengthValidator();
+            _inputArrayLengthValidator = new InputArrayLengthValidator(Constants.NumberOfColours);
         }
         
-        public Colours[]? TakeATurn()
+        public Either<Colour[], UserOption> TakeATurn()
         {
             // shouldn't be controlled by input/outputs
             // take in user input as parameter and remove while loop?
+            // do while loop??
+            
             while (true)
             {
                 var userInput = _inputReceiver.GetUserInput();
                 
-                if (userInput == UserOptions.Quit.ToString())
+                if (string.Equals(userInput, UserOption.Quit.ToString(), StringComparison.CurrentCultureIgnoreCase))
                 {
-                    return null;
+                    return UserOption.Quit;
                 }
-
+            
                 try
                 {
                     var userAnswer = InputColoursParser.ParseFromString(userInput);
                     _inputArrayLengthValidator.ValidateUserInput(userAnswer);
-
+            
                     return userAnswer;
                 }
                 catch (ArgumentException e)
@@ -47,10 +50,3 @@ namespace Mastermind
         }
     }
 }
-
-
-// sequence of parsers (ParseException) - 2 parsers (one for quit, one for colours)
-// return something that tells the game to quit e.g. quit command (enum)
-// parsing quit as a valid input - can still be an exception
-// parsing colours as a valid guess input
-// invalid inputs e.g. array length, invalid colour

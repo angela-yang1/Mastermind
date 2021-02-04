@@ -19,13 +19,15 @@ namespace MastermindTests
         {
             var mockRandomGen = new Mock<IRandomGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
-                .Returns(new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue });
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
 
             var mockGameEngine = new Mock<IGameEngine>();
             mockGameEngine.Setup(ge => ge.TakeATurn())
-                .Returns(new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue });
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
 
-            var mastermind = new MastermindWorld(mockRandomGen.Object, mockGameEngine.Object);
+            var mockDisplayMessage = new Mock<IDisplayMessage>();
+
+            var mastermind = new MastermindWorld(mockRandomGen.Object, mockGameEngine.Object, mockDisplayMessage.Object);
             mastermind.Run();
             var result = mastermind.HasAWinner;
             
@@ -40,13 +42,15 @@ namespace MastermindTests
         {
             var mockRandomGen = new Mock<IRandomGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
-                .Returns(new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue });
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
             
             var mockGameEngine = new Mock<IGameEngine>();
             mockGameEngine.Setup(ge => ge.TakeATurn())
-                .Returns(new[] { Colours.Red, Colours.Blue, Colours.Blue, Colours.Blue });
+                .Returns(new[] { Colour.Red, Colour.Blue, Colour.Blue, Colour.Blue });
+            
+            var mockDisplayMessage = new Mock<IDisplayMessage>();
 
-            var mastermind = new MastermindWorld(mockRandomGen.Object, mockGameEngine.Object);
+            var mastermind = new MastermindWorld(mockRandomGen.Object, mockGameEngine.Object, mockDisplayMessage.Object);
             mastermind.Run();
             var result = mastermind.HasAWinner;
             
@@ -60,15 +64,17 @@ namespace MastermindTests
         {
             var mockRandomGen = new Mock<IRandomGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
-                .Returns(new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue });
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
             
             // different types of inputs e.g. a guess or quit
             var mockGameEngine = new Mock<IGameEngine>();
             mockGameEngine.Setup(ge => ge.TakeATurn())
-                .Equals(UserOptions.Quit);
+                .Equals(UserOption.Quit);
+            
+            var mockDisplayMessage = new Mock<IDisplayMessage>();
             
             // what is the expected result
-            var mastermind = new MastermindWorld(mockRandomGen.Object, mockGameEngine.Object);
+            var mastermind = new MastermindWorld(mockRandomGen.Object, mockGameEngine.Object, mockDisplayMessage.Object);
             mastermind.Run();
             var result = mastermind.HasAWinner;
             

@@ -7,9 +7,9 @@ namespace Mastermind
 {
     public class WinningResult
     {
-        public List<ResultColours> CreateWinningResult(Colours[] guesses, Colours[] selectedColours)
+        public List<ResultColour> CreateWinningResult(Colour[] guesses, Colour[] selectedColours)
         {
-            var result = new List<ResultColours>();
+            var result = new List<ResultColour>();
             var guessesList = guesses.ToList();
             var selectedColoursList = selectedColours.ToList();
 
@@ -18,7 +18,7 @@ namespace Mastermind
             {
                 if (guessesList[i] == selectedColoursList[i])
                 {
-                    result.Add(ResultColours.Black);
+                    result.Add(ResultColour.Black);
                     guessesList.RemoveAt(i);
                     selectedColoursList.RemoveAt(i);
                 }
@@ -29,7 +29,7 @@ namespace Mastermind
             {
                 if (selectedColoursList.Contains(guessesList[i]))
                 {
-                    result.Add(ResultColours.White);
+                    result.Add(ResultColour.White);
                 }
             }
             
