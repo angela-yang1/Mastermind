@@ -11,7 +11,7 @@ namespace Mastermind
         private readonly IRandomGenerator _randomGenerator;
         private readonly IGameEngine _gameEngine;
         private readonly IDisplayMessage _displayMessage;
-        private readonly ResultOutput _resultOutput;
+        private readonly ResultColourMatch _resultColourMatch;
         private readonly TurnCount _turnCount;
 
         public MastermindWorld(IRandomGenerator randomGenerator, IGameEngine gameEngine, IDisplayMessage displayMessage)
@@ -19,7 +19,7 @@ namespace Mastermind
             _randomGenerator = randomGenerator;
             _gameEngine = gameEngine;
             _displayMessage = displayMessage;
-            _resultOutput = new ResultOutput();
+            _resultColourMatch = new ResultColourMatch();
             _turnCount = new TurnCount(Constants.MaxTries);
         }
         
@@ -58,7 +58,7 @@ namespace Mastermind
                 var userSelectedColours = userAnswer.Value1;
 
                 // check for matching colours (output: black/white)
-                var outputResult = _resultOutput.CreateWinningResult(userSelectedColours, masterColours);
+                var outputResult = _resultColourMatch.CreateWinningResult(userSelectedColours, masterColours);
 
                 // check for any matches
                 if (outputResult.Count != 0)

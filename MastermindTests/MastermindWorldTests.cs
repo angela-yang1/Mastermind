@@ -69,7 +69,7 @@ namespace MastermindTests
             // different types of inputs e.g. a guess or quit
             var mockGameEngine = new Mock<IGameEngine>();
             mockGameEngine.Setup(ge => ge.TakeATurn())
-                .Equals(UserOption.Quit);
+                .Returns(UserOption.Quit);
             
             var mockDisplayMessage = new Mock<IDisplayMessage>();
             
@@ -82,26 +82,5 @@ namespace MastermindTests
             mockGameEngine.Verify(ge => ge.TakeATurn(), Times.AtLeastOnce);
             Assert.False(result);
         }
-
-        // [Theory]
-        // [InlineData(new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue }, new[] { Colours.Blue, Colours.Blue, Colours.Blue, Colours.Blue })]
-        // public void GivenCorrectAnswer_HasAWinner_ShouldReturnTrue(Colours[] randomGenColours, Colours[] input)
-        // {
-        //     SetUpConsoleReadLineToStringReader(input);
-        //     var userInput = new UserInput();
-        //     var errorHandler = new ConsoleErrorHandler();
-        //     var gameEngine = new GameEngine(userInput, errorHandler);
-        //     var mastermind = new MastermindWorld(new RandomGenerator(), gameEngine);
-        //     mastermind.Run();
-        //     
-        //     Assert.Equal(randomGenColours, input);
-        // }
-        //
-        // private static void SetUpConsoleReadLineToStringReader(string input)
-        // {
-        //     var stringReader = new StringReader(input);
-        //     Console.Clear();
-        //     Console.SetIn(stringReader);
-        // }
     }
 }
