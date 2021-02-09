@@ -6,6 +6,7 @@ namespace Mastermind.Interfaces
     public interface IDisplay
     {
         public void Welcome();
+        public void AvailableColours();
         public void Win();
         public void NoColourMatch();
         public void MaxGuesses();

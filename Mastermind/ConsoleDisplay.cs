@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Figgle;
 using Mastermind.Enums;
 using Mastermind.Interfaces;
 
@@ -9,7 +10,12 @@ namespace Mastermind
     {
         public void Welcome()
         {
-            Console.WriteLine("Welcome to Mastermind! \n");
+            Console.WriteLine(
+                FiggleFonts.Standard.Render("Mastermind"));
+        }
+
+        public void AvailableColours()
+        {
             Console.WriteLine("Here are your available colours:");
 
             Console.ForegroundColor = ConsoleColor.Red;
@@ -42,7 +48,7 @@ namespace Mastermind
             
             Console.ResetColor();
         }
-
+        
         public void Win()
         {
             Console.WriteLine("You've won!");
