@@ -27,6 +27,7 @@ namespace Mastermind
         public void Run()
         {
             _display.Welcome();
+            _display.AvailableColours();
             var hasAWinner = false;
             
             // generate 4 random colours

@@ -26,8 +26,8 @@ namespace MastermindTests
         [Theory]
         [InlineData("Red, Pink, White, Yellow", new [] { "Pink", "White"})]
         [InlineData("Burgundy, , Blue, Yellow", new[] { "Burgundy", ""})]
-        [InlineData(" , , Red, ", new[] { "", "", ""})]
-        [InlineData(" , , , ", new[] { "", "", "", ""})]
+        [InlineData(" , , Red, ", new[] { "" })]
+        [InlineData(" , , , ", new[] { "" })]
         public void UserInputWithInvalidString_ShouldThrowException(string input, string[] invalidInput)
         {
             var parseException = Assert.Throws<ParseException>(() => InputColourParser.ParseFromString(input));

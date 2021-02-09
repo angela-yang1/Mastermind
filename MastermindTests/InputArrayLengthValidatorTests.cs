@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mastermind;
 using Mastermind.Enums;
+using Mastermind.Exceptions;
 using Xunit;
 
 namespace MastermindTests
@@ -29,7 +30,7 @@ namespace MastermindTests
         {
             var inputValidator = new InputArrayLengthValidator(4);
             
-            Assert.Throws<ArgumentException>(() => inputValidator.ValidateUserInput(inputArray));
+            Assert.Throws<LengthException>(() => inputValidator.ValidateUserInput(inputArray));
         }
         
         [Theory]
@@ -38,7 +39,7 @@ namespace MastermindTests
         {
             var inputValidator = new InputArrayLengthValidator(4);
             
-            Assert.Throws<ArgumentException>(() => inputValidator.ValidateUserInput(inputArray));
+            Assert.Throws<LengthException>(() => inputValidator.ValidateUserInput(inputArray));
         }
     }
 }

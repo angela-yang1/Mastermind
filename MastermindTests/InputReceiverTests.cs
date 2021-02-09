@@ -11,6 +11,7 @@ namespace MastermindTests
         [InlineData("red, red, red, red", "red, red, red, red")]
         [InlineData("Red, red, Red, red", "Red, red, Red, red")]
         [InlineData("red, Red, Red, red", "red, Red, Red, red")]
+        [InlineData("test, , Test, red", "test, , Test, red")]
         public void InputReceiver_ShouldReturnString(string input, string expected)
         {
             SetUpConsoleReadLineToStringReader(input);

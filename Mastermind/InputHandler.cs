@@ -25,7 +25,6 @@ namespace Mastermind
         {
             // shouldn't be controlled by input/outputs
             // take in user input as parameter and remove while loop?
-            // do while loop??
             
             while (true)
             {
@@ -46,8 +45,6 @@ namespace Mastermind
                 catch (ParseException e)
                 {
                     _consoleErrorHandler.DisplayParseErrorMessage(e);
-
-                    // display parse error
                 }
                 catch (LengthException e)
                 {

@@ -1,5 +1,4 @@
-﻿
-namespace Mastermind
+﻿namespace Mastermind
 {
     class Program
     {

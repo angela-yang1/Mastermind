@@ -8,12 +8,8 @@ namespace MastermindTests
 {
     public class GameEngineTests
     {
-        // mock up classes - test the loop runs as it should
-        // integration test (no mocks) - run Mastermind, assert on string etc
-        
-        // Set winning scenario
         [Fact]
-        public void Moq_GivenCorrectAnswer_HasAWinner_ShouldReturnTrue()
+        public void GivenCorrectGuess_RunLoopShouldStop()
         {
             var mockRandomGen = new Mock<IRandomGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
@@ -27,16 +23,14 @@ namespace MastermindTests
 
             var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
             gameEngine.Run();
-            //var result = gameEngine.HasAWinner;
             
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
             mockInputHandler.Verify(ge => ge.TakeInput(), Times.Once);
-            //Assert.True(result);
+            mockDisplayMessage.Verify(w => w.Win(), Times.Once);
         }
         
-        // Set incorrect guess
         [Fact]
-        public void Moq_GivenIncorrectAnswer_HasAWinner_ShouldReturnFalse()
+        public void GivenIncorrectGuess_RunLoopShouldKeepRunning()
         {
             var mockRandomGen = new Mock<IRandomGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
@@ -50,35 +44,30 @@ namespace MastermindTests
 
             var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
             gameEngine.Run();
-            //var result = gameEngine.HasAWinner;
             
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
             mockInputHandler.Verify(ge => ge.TakeInput(), Times.AtLeastOnce);
-            //Assert.False(result);
         }
         
         [Fact]
-        public void Moq_SelectQuitOption_ShouldQuitGame()
+        public void GivenUserInput_IsUserOptionQuit_ShouldQuitGame()
         {
             var mockRandomGen = new Mock<IRandomGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
                 .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
-            
-            // different types of inputs e.g. a guess or quit
+
             var mockInputHandler = new Mock<IInputHandler>();
             mockInputHandler.Setup(ge => ge.TakeInput())
                 .Returns(UserOption.Quit);
             
             var mockDisplayMessage = new Mock<IDisplay>();
             
-            // what is the expected result
             var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
             gameEngine.Run();
-            //var result = gameEngine.HasAWinner;
-            
+
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
-            mockInputHandler.Verify(ge => ge.TakeInput(), Times.AtLeastOnce);
-            //Assert.False(result);
+            mockInputHandler.Verify(ge => ge.TakeInput(), Times.Once);
+            mockDisplayMessage.Verify(q => q.Quit(), Times.Once);
         }
     }
 }
