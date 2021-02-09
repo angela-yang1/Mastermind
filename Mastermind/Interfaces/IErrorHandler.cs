@@ -1,9 +1,11 @@
 using System;
+using Mastermind.Exceptions;
 
 namespace Mastermind.Interfaces
 {
     public interface IErrorHandler
     {
-        public void DisplayErrorMessage(Exception e);
+        public void DisplayParseErrorMessage(ParseException e);
+        public void DisplayLengthErrorMessage(LengthException e);
     }
 }

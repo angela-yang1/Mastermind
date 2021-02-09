@@ -1,52 +1,98 @@
-#nullable enable
 using System;
 using System.Collections.Generic;
-using BCL;
 using Mastermind.Enums;
 using Mastermind.Interfaces;
 
 namespace Mastermind
 {
-    public class GameEngine : IGameEngine
+    public class GameEngine
     {
-        private readonly IInputReceiver _inputReceiver;
-        private readonly IErrorHandler _consoleErrorHandler;
-        private readonly InputArrayLengthValidator _inputArrayLengthValidator;
+        private readonly IRandomGenerator _randomGenerator;
+        private readonly IInputHandler _inputHandler;
+        private readonly IDisplay _display;
+        private readonly ColourMatchResult _colourMatchResult;
+        private readonly TurnCount _turnCount;
+        private readonly WinnerChecker _winnerChecker;
 
-        public GameEngine(IInputReceiver inputReceiver, IErrorHandler consoleErrorHandler)
+        public GameEngine(IRandomGenerator randomGenerator, IInputHandler inputHandler, IDisplay display)
         {
-            _inputReceiver = inputReceiver;
-            _consoleErrorHandler = consoleErrorHandler;
-            _inputArrayLengthValidator = new InputArrayLengthValidator(Constants.NumberOfColours);
+            _randomGenerator = randomGenerator;
+            _inputHandler = inputHandler;
+            _display = display;
+            _colourMatchResult = new ColourMatchResult();
+            _turnCount = new TurnCount(Constants.MaxTries);
+            _winnerChecker = new WinnerChecker(Constants.MasterColoursCount);
         }
         
-        public Either<Colour[], UserOption> TakeATurn()
+        public void Run()
         {
-            // shouldn't be controlled by input/outputs
-            // take in user input as parameter and remove while loop?
-            // do while loop??
+            _display.Welcome();
+            var hasAWinner = false;
             
-            while (true)
+            // generate 4 random colours
+            var masterColours = _randomGenerator.Generate();
+            // prints random 4 colours selected
+            Console.WriteLine(string.Join(", ", masterColours));
+
+            // loop until user wins or reaches max guesses
+            while (!hasAWinner && !MaxTriesReached())
             {
-                var userInput = _inputReceiver.GetUserInput();
+                // get validated input
+                var userAnswer = _inputHandler.TakeInput();
+
+                // user selected menu option
+                    // - extension method to make class more explicit and more descriptive
+                if (userAnswer.GetSelectedAlternative() == 2)
+                {
+                    // value 2 = UserOption
+                    var userSelectedOption = userAnswer.Value2;
+                    
+                    if (QuitApplication(userSelectedOption)) 
+                        break;
+                }
                 
-                if (string.Equals(userInput, UserOption.Quit.ToString(), StringComparison.CurrentCultureIgnoreCase))
+                // value 1 = colours array
+                var userSelectedColours = userAnswer.Value1;
+
+                // check for matching colours (output: black/white)
+                var matchResult = _colourMatchResult.CreateResult(userSelectedColours, masterColours);
+
+                // check for any matches
+                if (matchResult.Count != 0)
                 {
-                    return UserOption.Quit;
+                    // check against guess checker
+                    hasAWinner = IsThereAWinner(matchResult);
+                    _display.TurnCounter(_turnCount.Counter, matchResult);
                 }
-            
-                try
+                else
                 {
-                    var userAnswer = InputColoursParser.ParseFromString(userInput);
-                    _inputArrayLengthValidator.ValidateUserInput(userAnswer);
-            
-                    return userAnswer;
+                    _display.NoColourMatch();
                 }
-                catch (ArgumentException e)
-                {
-                    _consoleErrorHandler.DisplayErrorMessage(e);
-                }
+                
+                _turnCount.NextTurn();
             }
+        }
+
+        private bool QuitApplication(UserOption userSelectedOption)
+        {
+            if (userSelectedOption != UserOption.Quit) return false;
+            _display.Quit();
+            return true;
+        }
+
+        private bool MaxTriesReached()
+        {
+            if (!_turnCount.HasMaxTriesBeenReached()) return false;
+            _display.MaxGuesses();
+            return true;
+        }
+
+        private bool IsThereAWinner(List<ResultColour> matchResult)
+        {
+            if (!_winnerChecker.HasUserWon(matchResult)) return false;
+            _display.Win();
+            return true;
+
         }
     }
 }

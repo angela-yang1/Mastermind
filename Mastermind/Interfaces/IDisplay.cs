@@ -3,7 +3,7 @@ using Mastermind.Enums;
 
 namespace Mastermind.Interfaces
 {
-    public interface IDisplayMessage
+    public interface IDisplay
     {
         public void Welcome();
         public void Win();

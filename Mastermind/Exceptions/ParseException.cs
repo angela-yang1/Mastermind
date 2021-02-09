@@ -5,11 +5,11 @@ namespace Mastermind.Exceptions
 {
     public class ParseException : Exception
     {
-        public List<string> ColoursInput { get; }
+        public List<string> InvalidColourInput { get; }
 
-        public ParseException(List<string> coloursInput)
+        public ParseException(List<string> invalidColourInput)
         {
-            ColoursInput = coloursInput;
+            InvalidColourInput = invalidColourInput;
         }
     }
 }

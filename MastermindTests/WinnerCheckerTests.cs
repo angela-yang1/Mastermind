@@ -10,10 +10,11 @@ namespace MastermindTests
         [Fact]
         public void IfUserAnswer_EqualsAllBlack_UserHasWon()
         {
-            var winningCondition = new List<ResultColour>()
+            var winnerChecker = new WinnerChecker(Constants.MasterColoursCount);
+            var colourMatchResult = new List<ResultColour>()
             { ResultColour.Black, ResultColour.Black, ResultColour.Black, ResultColour.Black };
 
-            var result = WinnerChecker.HasUserWon(winningCondition);
+            var result = winnerChecker.HasUserWon(colourMatchResult);
             
             Assert.True(result);
         }
@@ -21,10 +22,11 @@ namespace MastermindTests
         [Fact]
         public void IfUserAnswer_DoesNotEqualAllBlack_UserHasNotWon()
         {
-            var winningCondition = new List<ResultColour>()
+            var winnerChecker = new WinnerChecker(Constants.MasterColoursCount);
+            var colourMatchResult = new List<ResultColour>()
                 { ResultColour.Black, ResultColour.Black, ResultColour.Black };
 
-            var result = WinnerChecker.HasUserWon(winningCondition);
+            var result = winnerChecker.HasUserWon(colourMatchResult);
             
             Assert.False(result);
         }

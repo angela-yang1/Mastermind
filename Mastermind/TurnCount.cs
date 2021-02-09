@@ -20,7 +20,7 @@ namespace Mastermind
 
         public bool HasMaxTriesBeenReached()
         {
-            return Counter == _maxTries;
+            return Counter == _maxTries + 1;
         }
     }
 }

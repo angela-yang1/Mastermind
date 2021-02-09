@@ -1,33 +1,24 @@
 using System;
 using Mastermind.Enums;
+using Mastermind.Exceptions;
 
 namespace Mastermind
 {
     public class InputArrayLengthValidator
     {
-        private readonly int _numberOfColours;
+        private readonly int _masterColoursCount;
 
-        public InputArrayLengthValidator(int numberOfColours)
+        public InputArrayLengthValidator(int masterColoursCount)
         {
-            _numberOfColours = numberOfColours;
+            _masterColoursCount = masterColoursCount;
         }
 
         public void ValidateUserInput(Colour[] userInput)
         {
-            var isCorrectLength = IsArrayLengthCorrect(userInput);
-
-            if (!isCorrectLength)
+            if (userInput.Length != _masterColoursCount)
             {
-                throw new ArgumentException($"Error: You must pass {_numberOfColours} colours. You have entered {userInput.Length}");
+                throw new LengthException(_masterColoursCount, userInput.Length);
             }
-        }
-
-        private bool IsArrayLengthCorrect(Colour[] userInput)
-        {
-            // return void and throw exception?
-            var arrayLength = _numberOfColours;
-
-            return userInput.Length == arrayLength;
         }
     }
 }

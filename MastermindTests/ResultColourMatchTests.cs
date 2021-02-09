@@ -15,12 +15,12 @@ namespace MastermindTests
         [Fact]
         public void GivenCorrectColourAndIndex_ShouldReturnTrue_ForFourBlackValues()
         {
-            var winningCondition = new ResultColourMatch();
+            var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Blue, Colour.Green, Colour.Yellow, Colour.Blue };
-            winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+            colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
 
-            var result = winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+            var result = colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
                 
             Assert.True(result
                 .All(c => c == ResultColour.Black) && result.Count == 4);
@@ -29,12 +29,12 @@ namespace MastermindTests
         [Fact]
         public void GivenTwoCorrectColourAndIndex_ShouldReturnTrue_ForTwoBlackValues()
         {
-            var winningCondition = new ResultColourMatch();
+            var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Blue, Colour.Green, Colour.Red, Colour.Orange };
-            winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+            colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
             
-            var result = winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+            var result = colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
 
             Assert.True(result
                 .All(c => c == ResultColour.Black) && result.Count == 2);
@@ -43,12 +43,12 @@ namespace MastermindTests
         [Fact]
         public void GivenTwoCorrectColoursWithIncorrectIndex_ShouldReturnTrue_ForTwoWhiteValues()
         {
-            var winningCondition = new ResultColourMatch();
+            var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Red, Colour.Blue, Colour.Green, Colour.Orange };
-            winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+            colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
 
-            var result = winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+            var result = colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
             
             Assert.True(result
                 .All(c => c == ResultColour.White) && result.Count == 2);
@@ -57,12 +57,12 @@ namespace MastermindTests
         [Fact]
         public void GivenDuplicateColoursWithIncorrectIndex_ShouldReturnOneWhiteAndOneBlackValues()
         {
-            var winningCondition = new ResultColourMatch();
+            var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Blue, Colour.Blue, Colour.Green, Colour.Blue };
-            winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+            colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
 
-            var result = winningCondition.CreateWinningResult(userGuesses, _masterSelectedColours);
+            var result = colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
             var blackCount = result.Count(c => c == ResultColour.Black);
             var whiteCount = result.Count(c => c == ResultColour.White);
             

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace MastermindTests
 {
-    public class RandomGeneratorTests
+    public class RandomColourGeneratorTests
     {
         [Fact]
         public void GenerateFourRandomColours_WhenGameBegins()

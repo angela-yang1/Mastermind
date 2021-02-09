@@ -5,8 +5,6 @@ namespace MastermindTests
 {
     public class TurnCountTests
     {
-        // Turn count starts at 1 - max tries is 60
-        
         [Fact]
         public void NextTurn_ShouldIncrementGuessCountBy1()
         {
@@ -37,6 +35,7 @@ namespace MastermindTests
         public void WhenMaxGuessTriesReached_ReturnTrue()
         {
             var turnCount = new TurnCount(2);
+            turnCount.NextTurn();
             turnCount.NextTurn();
 
             var result = turnCount.HasMaxTriesBeenReached();

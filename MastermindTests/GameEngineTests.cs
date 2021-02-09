@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.InteropServices;
 using Mastermind;
 using Mastermind.Enums;
 using Mastermind.Interfaces;
@@ -10,37 +8,77 @@ namespace MastermindTests
 {
     public class GameEngineTests
     {
+        // mock up classes - test the loop runs as it should
+        // integration test (no mocks) - run Mastermind, assert on string etc
+        
+        // Set winning scenario
         [Fact]
-        public void GetUserAnswer_ValidatesAndReturnsAn_ColoursArrayWithFourItems()
+        public void Moq_GivenCorrectAnswer_HasAWinner_ShouldReturnTrue()
         {
-            var mockUserInput = new Mock<IInputReceiver>();
-            var mockErrorHandler = new Mock<IErrorHandler>();
-            mockUserInput.Setup(i => i.GetUserInput())
-                .Returns("Red, Blue, Yellow, Green");
+            var mockRandomGen = new Mock<IRandomGenerator>();
+            mockRandomGen.Setup(rng => rng.Generate())
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
+
+            var mockInputHandler = new Mock<IInputHandler>();
+            mockInputHandler.Setup(ge => ge.TakeInput())
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
+
+            var mockDisplayMessage = new Mock<IDisplay>();
+
+            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
+            gameEngine.Run();
+            //var result = gameEngine.HasAWinner;
             
-            var gameEngine = new GameEngine(mockUserInput.Object, mockErrorHandler.Object);
-            var result = gameEngine.TakeATurn();
+            mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
+            mockInputHandler.Verify(ge => ge.TakeInput(), Times.Once);
+            //Assert.True(result);
+        }
+        
+        // Set incorrect guess
+        [Fact]
+        public void Moq_GivenIncorrectAnswer_HasAWinner_ShouldReturnFalse()
+        {
+            var mockRandomGen = new Mock<IRandomGenerator>();
+            mockRandomGen.Setup(rng => rng.Generate())
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
             
-            mockErrorHandler.Verify(e => e.DisplayErrorMessage(It.IsAny<Exception>()), Times.Never);
-            Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
+            var mockInputHandler = new Mock<IInputHandler>();
+            mockInputHandler.Setup(ge => ge.TakeInput())
+                .Returns(new[] { Colour.Red, Colour.Blue, Colour.Blue, Colour.Blue });
+            
+            var mockDisplayMessage = new Mock<IDisplay>();
+
+            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
+            gameEngine.Run();
+            //var result = gameEngine.HasAWinner;
+            
+            mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
+            mockInputHandler.Verify(ge => ge.TakeInput(), Times.AtLeastOnce);
+            //Assert.False(result);
         }
         
         [Fact]
-        public void InvalidUserAnswer_ShouldCallDisplayExceptionMessage()
+        public void Moq_SelectQuitOption_ShouldQuitGame()
         {
-            var mockUserInput = new Mock<IInputReceiver>();
-            var mockErrorHandler = new Mock<IErrorHandler>();
+            var mockRandomGen = new Mock<IRandomGenerator>();
+            mockRandomGen.Setup(rng => rng.Generate())
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
             
-            mockUserInput.SetupSequence(i => i.GetUserInput())
-                .Returns("Pink, Blue, Yellow, Green")
-                .Returns("Red, Blue, Yellow, Green");
-        
-            var gameEngine = new GameEngine(mockUserInput.Object, mockErrorHandler.Object);
-            var result = gameEngine.TakeATurn();
-        
-            mockErrorHandler.Verify(m =>
-                m.DisplayErrorMessage(It.Is<ArgumentException>(e => e.Message == "Pink is not a valid colour.")), Times.Once);
-            Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
+            // different types of inputs e.g. a guess or quit
+            var mockInputHandler = new Mock<IInputHandler>();
+            mockInputHandler.Setup(ge => ge.TakeInput())
+                .Returns(UserOption.Quit);
+            
+            var mockDisplayMessage = new Mock<IDisplay>();
+            
+            // what is the expected result
+            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
+            gameEngine.Run();
+            //var result = gameEngine.HasAWinner;
+            
+            mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
+            mockInputHandler.Verify(ge => ge.TakeInput(), Times.AtLeastOnce);
+            //Assert.False(result);
         }
     }
 }

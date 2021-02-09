@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using Mastermind;
 using Mastermind.Enums;
+using Mastermind.Exceptions;
 using Xunit;
 
 namespace MastermindTests
@@ -16,19 +18,21 @@ namespace MastermindTests
         [InlineData("yellow, Green, blue, Blue", new[] { Colour.Yellow, Colour.Green, Colour.Blue, Colour.Blue})]
         public void UserInputString_ShouldConvertToEnumArray(string input, Colour[] expected)
         {
-            var result = InputColoursParser.ParseFromString(input);
+            var result = InputColourParser.ParseFromString(input);
 
             Assert.Equal(expected, result);
         }
-
+        
         [Theory]
-        [InlineData("Red, Pink, White, Yellow")]
-        [InlineData("Burgundy, , Blue, Yellow")]
-        [InlineData(" , , Red, ")]
-        [InlineData(" , , , ")]
-        public void UserInputWithInvalidString_ShouldThrowException(string input)
+        [InlineData("Red, Pink, White, Yellow", new [] { "Pink", "White"})]
+        [InlineData("Burgundy, , Blue, Yellow", new[] { "Burgundy", ""})]
+        [InlineData(" , , Red, ", new[] { "", "", ""})]
+        [InlineData(" , , , ", new[] { "", "", "", ""})]
+        public void UserInputWithInvalidString_ShouldThrowException(string input, string[] invalidInput)
         {
-            Assert.Throws<ArgumentException>(() => InputColoursParser.ParseFromString(input));
+            var parseException = Assert.Throws<ParseException>(() => InputColourParser.ParseFromString(input));
+            
+            Assert.Equal(invalidInput.ToList(), parseException.InvalidColourInput);
         }
     }
 }

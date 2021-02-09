@@ -20,7 +20,7 @@ namespace Mastermind
 
             var enumValues = type.GetEnumValues();
 
-            for (var i = 0; i < Constants.NumberOfColours; i++)
+            for (var i = 0; i < _selectedColours.Length; i++)
             {
                 var randomChosenIndex = random.Next(0, enumValues.Length);
                 _selectedColours[i] = (Colour)enumValues.GetValue(randomChosenIndex);

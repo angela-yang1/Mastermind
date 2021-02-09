@@ -5,14 +5,21 @@ using Mastermind.Enums;
 
 namespace Mastermind
 {
-    public static class WinnerChecker
+    public class WinnerChecker
     {
-        public static bool HasUserWon(List<ResultColour> winningCondition)
+        private readonly int _masterColoursCount;
+        
+        public WinnerChecker(int masterColoursCount)
         {
-            if (winningCondition.Count != Constants.NumberOfColours) 
+            _masterColoursCount = masterColoursCount;
+        }
+        
+        public bool HasUserWon(List<ResultColour> colourMatchResult)
+        {
+            if (colourMatchResult.Count != _masterColoursCount) 
                 return false;
             
-            var userHasWon = winningCondition
+            var userHasWon = colourMatchResult
                 .All(c => c == ResultColour.Black);
             
             return userHasWon;

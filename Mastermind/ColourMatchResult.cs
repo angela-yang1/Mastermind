@@ -5,9 +5,9 @@ using Mastermind.Enums;
 
 namespace Mastermind
 {
-    public class ResultColourMatch
+    public class ColourMatchResult
     {
-        public List<ResultColour> CreateWinningResult(Colour[] guesses, Colour[] selectedColours)
+        public List<ResultColour> CreateResult(Colour[] guesses, Colour[] selectedColours)
         {
             var result = new List<ResultColour>();
             var guessesList = guesses.ToList();

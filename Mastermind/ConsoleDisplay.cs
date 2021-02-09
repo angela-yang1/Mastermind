@@ -5,7 +5,7 @@ using Mastermind.Interfaces;
 
 namespace Mastermind
 {
-    public class DisplayMessage : IDisplayMessage
+    public class ConsoleDisplay : IDisplay
     {
         public void Welcome()
         {
