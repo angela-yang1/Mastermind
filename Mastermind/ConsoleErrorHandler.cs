@@ -9,12 +9,12 @@ namespace Mastermind
     {
         public void DisplayParseErrorMessage(ParseException e)
         {
-            Console.WriteLine($"{string.Join(", ", e.InvalidColourInput)} is not a valid colour.");
+            Console.WriteLine($"\n{string.Join(", ", e.InvalidColourInput)} is not a valid colour.");
         }
 
         public void DisplayLengthErrorMessage(LengthException e)
         {
-            Console.WriteLine($"Error: You must pass {e.MasterColourCount} colours. You have entered {e.InputColourCount}");
+            Console.WriteLine($"\nError: You must pass {e.MasterColourCount} colours. You have entered {e.InputColourCount}");
         }
     }
 }

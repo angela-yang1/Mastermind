@@ -11,12 +11,12 @@ namespace Mastermind
         public void Welcome()
         {
             Console.WriteLine(
-                FiggleFonts.Standard.Render("Mastermind"));
+                FiggleFonts.Bolger.Render("Mastermind"));
         }
 
         public void AvailableColours()
         {
-            Console.WriteLine("Here are your available colours:");
+            Console.WriteLine("🧠 Here are your available colours: 🧠");
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("Red");
@@ -51,7 +51,7 @@ namespace Mastermind
         
         public void Win()
         {
-            Console.WriteLine("You've won!");
+            Console.WriteLine("\nAll your guesses match! You've won!\n");
         }
 
         public void NoColourMatch()
@@ -66,7 +66,7 @@ namespace Mastermind
         
         public void Quit()
         {
-            Console.WriteLine("\nYou've quit the game");
+            Console.WriteLine("\nYou've quit the game\n");
         }
 
         public void TurnCounter(int turnCount, List<ResultColour> guessResult)

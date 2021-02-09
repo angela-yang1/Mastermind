@@ -62,8 +62,8 @@ namespace Mastermind
                 if (matchResult.Count != 0)
                 {
                     // check against guess checker
-                    hasAWinner = IsThereAWinner(matchResult);
                     _display.TurnCounter(_turnCount.Counter, matchResult);
+                    hasAWinner = IsThereAWinner(matchResult);
                 }
                 else
                 {

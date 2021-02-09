@@ -25,9 +25,9 @@ namespace MastermindTests
             mockErrorHandler.Verify(e => e.DisplayParseErrorMessage(It.IsAny<ParseException>()), Times.Never);
             Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
         }
-        
+
         [Fact]
-        public void InvalidUserAnswer_ShouldCallDisplayExceptionMessage()
+        public void GivenInvalidColour_ShouldCallDisplayParseExceptionMessage()
         {
             var mockUserInput = new Mock<IInputReceiver>();
             var mockErrorHandler = new Mock<IErrorHandler>();
@@ -42,6 +42,39 @@ namespace MastermindTests
             mockErrorHandler.Verify(m =>
                 m.DisplayParseErrorMessage(It.Is<ParseException>(e => e.InvalidColourInput.Contains("Pink"))), Times.Once);
             Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
+        }
+        
+        [Fact]
+        public void GivenInvalidMasterColourLength_ShouldCallDisplayLengthExceptionMessage()
+        {
+            var mockUserInput = new Mock<IInputReceiver>();
+            var mockErrorHandler = new Mock<IErrorHandler>();
+
+            mockUserInput.SetupSequence(i => i.GetUserInput())
+                .Returns("Blue, Yellow, Green")
+                .Returns("Red, Blue, Yellow, Green");;
+        
+            var inputHandler = new InputHandler(mockUserInput.Object, mockErrorHandler.Object);
+            var result = inputHandler.TakeInput();
+        
+            mockErrorHandler.Verify(m =>
+                m.DisplayLengthErrorMessage(It.Is<LengthException>(e => e.InputColourCount == 3)), Times.Once);
+            Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
+        }
+        
+        [Fact]
+        public void GetUserAnswer_ValidatesAndReturnsUserOption_Quit()
+        {
+            var mockUserInput = new Mock<IInputReceiver>();
+            var mockErrorHandler = new Mock<IErrorHandler>();
+            mockUserInput.Setup(i => i.GetUserInput())
+                .Returns("Quit");
+            
+            var inputHandler = new InputHandler(mockUserInput.Object, mockErrorHandler.Object);
+            var result = inputHandler.TakeInput();
+            
+            mockErrorHandler.Verify(e => e.DisplayParseErrorMessage(It.IsAny<ParseException>()), Times.Never);
+            Assert.Equal(UserOption.Quit, result);
         }
     }
 }
