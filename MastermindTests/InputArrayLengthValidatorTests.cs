@@ -28,7 +28,7 @@ namespace MastermindTests
         [InlineData(new[] { Colour.Yellow })]
         public void UserInputArray_ContainingLessThanFourItems_ThrowsException(Colour[] inputArray)
         {
-            var inputValidator = new InputArrayLengthValidator(4);
+            var inputValidator = new InputArrayLengthValidator(Constants.MasterColoursCount);
             
             Assert.Throws<LengthException>(() => inputValidator.ValidateUserInput(inputArray));
         }
@@ -37,7 +37,7 @@ namespace MastermindTests
         [InlineData(new[] { Colour.Red, Colour.Blue, Colour.Green, Colour.Blue, Colour.Purple, Colour.Orange })]
         public void UserInputArray_ContainingMoreThanFourItems_ThrowsException(Colour[] inputArray)
         {
-            var inputValidator = new InputArrayLengthValidator(4);
+            var inputValidator = new InputArrayLengthValidator(Constants.MasterColoursCount);
             
             Assert.Throws<LengthException>(() => inputValidator.ValidateUserInput(inputArray));
         }
