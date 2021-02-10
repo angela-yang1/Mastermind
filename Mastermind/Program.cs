@@ -7,10 +7,10 @@
             var randomGen = new RandomColourGenerator(Constants.MasterColoursCount);
             var userInput = new InputReceiver();
             var errorHandler = new ConsoleErrorHandler();
-            var displayMessage = new ConsoleDisplay();
+            var consoleDisplay = new ConsoleDisplay();
             var inputHandler = new InputHandler(userInput, errorHandler);
             
-            var gameEngine = new GameEngine(randomGen, inputHandler, displayMessage);
+            var gameEngine = new GameEngine(randomGen, inputHandler, consoleDisplay);
             gameEngine.Run();
         }
     }

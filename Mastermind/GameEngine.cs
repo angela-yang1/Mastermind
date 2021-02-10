@@ -11,7 +11,7 @@ namespace Mastermind
         private readonly IInputHandler _inputHandler;
         private readonly IDisplay _display;
         private readonly ColourMatchResult _colourMatchResult;
-        private readonly TurnCount _turnCount;
+        private readonly TurnCountTracker _turnCountTracker;
         private readonly WinnerChecker _winnerChecker;
 
         public GameEngine(IRandomGenerator randomGenerator, IInputHandler inputHandler, IDisplay display)
@@ -20,7 +20,7 @@ namespace Mastermind
             _inputHandler = inputHandler;
             _display = display;
             _colourMatchResult = new ColourMatchResult();
-            _turnCount = new TurnCount(Constants.MaxTries);
+            _turnCountTracker = new TurnCountTracker(Constants.MaxTries);
             _winnerChecker = new WinnerChecker(Constants.MasterColoursCount);
         }
         
@@ -32,11 +32,10 @@ namespace Mastermind
             
             // generate 4 random colours
             var masterColours = _randomGenerator.Generate();
-            // prints random 4 colours selected
-            Console.WriteLine(string.Join(", ", masterColours));
+            Console.WriteLine("MASTER COLOURS: "+ string.Join(", ", masterColours));
 
             // loop until user wins or reaches max guesses
-            while (!hasAWinner && !MaxTriesReached())
+            while (!hasAWinner && !HasMaxTriesReached())
             {
                 // get validated input
                 var userAnswer = _inputHandler.TakeInput();
@@ -62,7 +61,7 @@ namespace Mastermind
                 if (matchResult.Count != 0)
                 {
                     // check against guess checker
-                    _display.TurnCounter(_turnCount.Counter, matchResult);
+                    _display.TurnCounter(_turnCountTracker.Counter, matchResult);
                     hasAWinner = IsThereAWinner(matchResult);
                 }
                 else
@@ -70,7 +69,7 @@ namespace Mastermind
                     _display.NoColourMatch();
                 }
                 
-                _turnCount.NextTurn();
+                _turnCountTracker.NextTurn();
             }
         }
 
@@ -81,9 +80,9 @@ namespace Mastermind
             return true;
         }
 
-        private bool MaxTriesReached()
+        private bool HasMaxTriesReached()
         {
-            if (!_turnCount.HasMaxTriesBeenReached()) return false;
+            if (!_turnCountTracker.HasMaxTriesBeenReached()) return false;
             _display.MaxGuesses();
             return true;
         }
@@ -93,7 +92,6 @@ namespace Mastermind
             if (!_winnerChecker.HasUserWon(matchResult)) return false;
             _display.Win();
             return true;
-
         }
     }
 }

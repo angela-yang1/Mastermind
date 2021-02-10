@@ -66,7 +66,7 @@ namespace Mastermind
         
         public void Quit()
         {
-            Console.WriteLine("\nYou've quit the game\n");
+            Console.WriteLine("\nYou've quit the game");
         }
 
         public void TurnCounter(int turnCount, List<ResultColour> guessResult)

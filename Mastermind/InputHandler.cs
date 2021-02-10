@@ -11,13 +11,13 @@ namespace Mastermind
     public class InputHandler : IInputHandler
     {
         private readonly IInputReceiver _inputReceiver;
-        private readonly IErrorHandler _consoleErrorHandler;
+        private readonly IErrorHandler _errorHandler;
         private readonly InputArrayLengthValidator _inputArrayLengthValidator;
 
-        public InputHandler(IInputReceiver inputReceiver, IErrorHandler consoleErrorHandler)
+        public InputHandler(IInputReceiver inputReceiver, IErrorHandler errorHandler)
         {
             _inputReceiver = inputReceiver;
-            _consoleErrorHandler = consoleErrorHandler;
+            _errorHandler = errorHandler;
             _inputArrayLengthValidator = new InputArrayLengthValidator(Constants.MasterColoursCount);
         }
         
@@ -44,11 +44,11 @@ namespace Mastermind
                 }
                 catch (ParseException e)
                 {
-                    _consoleErrorHandler.DisplayParseErrorMessage(e);
+                    _errorHandler.DisplayParseErrorMessage(e);
                 }
                 catch (LengthException e)
                 {
-                    _consoleErrorHandler.DisplayLengthErrorMessage(e);
+                    _errorHandler.DisplayLengthErrorMessage(e);
                 }
                 
             }

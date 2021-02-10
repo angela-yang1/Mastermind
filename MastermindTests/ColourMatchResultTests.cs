@@ -7,7 +7,7 @@ using Xunit;
 
 namespace MastermindTests
 {
-    public class ColourMatchTests
+    public class ColourMatchResultTests
     {
         private readonly Colour[] _masterSelectedColours = 
             { Colour.Blue, Colour.Green, Colour.Yellow, Colour.Blue };

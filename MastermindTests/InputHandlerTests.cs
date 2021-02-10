@@ -39,8 +39,8 @@ namespace MastermindTests
             var inputHandler = new InputHandler(mockUserInput.Object, mockErrorHandler.Object);
             var result = inputHandler.TakeInput();
         
-            mockErrorHandler.Verify(m =>
-                m.DisplayParseErrorMessage(It.Is<ParseException>(e => e.InvalidColourInput.Contains("Pink"))), Times.Once);
+            mockErrorHandler.Verify(e =>
+                e.DisplayParseErrorMessage(It.Is<ParseException>(e => e.InvalidColourInput.Contains("Pink"))), Times.Once);
             Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
         }
         
@@ -57,8 +57,8 @@ namespace MastermindTests
             var inputHandler = new InputHandler(mockUserInput.Object, mockErrorHandler.Object);
             var result = inputHandler.TakeInput();
         
-            mockErrorHandler.Verify(m =>
-                m.DisplayLengthErrorMessage(It.Is<LengthException>(e => e.InputColourCount == 3)), Times.Once);
+            mockErrorHandler.Verify(e =>
+                e.DisplayLengthErrorMessage(It.Is<LengthException>(e => e.InputColourCount == 3)), Times.Once);
             Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
         }
         

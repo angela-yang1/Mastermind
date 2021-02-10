@@ -1,10 +1,10 @@
 namespace Mastermind
 {
-    public class TurnCount
+    public class TurnCountTracker
     {
         private readonly int _maxTries;
         
-        public TurnCount(int maxTries)
+        public TurnCountTracker(int maxTries)
         {
             _maxTries = maxTries;
             Counter = 1;

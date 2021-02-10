@@ -9,7 +9,7 @@ namespace MastermindTests
     public class GameEngineTests
     {
         [Fact]
-        public void GivenCorrectGuess_RunLoopShouldStop()
+        public void GivenCorrectGuess_LoopShouldStop_AndPrintWinMessage()
         {
             var mockRandomGen = new Mock<IRandomGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
@@ -30,7 +30,30 @@ namespace MastermindTests
         }
         
         [Fact]
-        public void GivenIncorrectGuess_RunLoopShouldKeepRunning()
+        public void GivenNoColourMatches_ShouldDisplayNoMatchMessage()
+        {
+            var mockRandomGen = new Mock<IRandomGenerator>();
+            mockRandomGen.Setup(rng => rng.Generate())
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
+            
+            var mockInputHandler = new Mock<IInputHandler>();
+            mockInputHandler.SetupSequence(ge => ge.TakeInput())
+                .Returns(new[] { Colour.Red, Colour.Yellow, Colour.Green, Colour.Red })
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
+
+            var mockDisplayMessage = new Mock<IDisplay>();
+
+            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
+            gameEngine.Run();
+            
+            mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
+            mockInputHandler.Verify(ge => ge.TakeInput(), Times.AtLeastOnce);
+            mockDisplayMessage.Verify(i => i.NoColourMatch(), Times.Once);
+            mockDisplayMessage.Verify(w => w.Win(), Times.Once);
+        }
+        
+        [Fact]
+        public void GivenIncorrectGuess_LoopShouldKeepRunning()
         {
             var mockRandomGen = new Mock<IRandomGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
@@ -46,7 +69,7 @@ namespace MastermindTests
             gameEngine.Run();
             
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
-            mockInputHandler.Verify(ge => ge.TakeInput(), Times.AtLeastOnce);
+            mockInputHandler.Verify(i => i.TakeInput(), Times.AtLeastOnce);
         }
         
         [Fact]
@@ -66,7 +89,7 @@ namespace MastermindTests
             gameEngine.Run();
 
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
-            mockInputHandler.Verify(ge => ge.TakeInput(), Times.Once);
+            mockInputHandler.Verify(i => i.TakeInput(), Times.Once);
             mockDisplayMessage.Verify(q => q.Quit(), Times.Once);
         }
     }

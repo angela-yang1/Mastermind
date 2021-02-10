@@ -33,7 +33,25 @@ namespace Mastermind
                 }
             }
             
-            return result.OrderBy(x => Guid.NewGuid()).ToList();;
+            //return result.OrderBy(x => Guid.NewGuid()).ToList();
+            Shuffle(result);
+            return result;
+        }
+
+        // look into using with OrderBy - rng
+        private void Shuffle(List<ResultColour> matchResult)
+        {
+            var random = new Random();
+            var num = matchResult.Count;
+
+            while (num > 1)
+            {
+                num--;
+                var randomNum = random.Next(num + 1);
+                var value = matchResult[randomNum];
+                matchResult[randomNum] = matchResult[num];
+                matchResult[num] = value;
+            }
         }
     }
 }
