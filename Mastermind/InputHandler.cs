@@ -44,11 +44,11 @@ namespace Mastermind
                 }
                 catch (ParseException e)
                 {
-                    _errorHandler.DisplayParseErrorMessage(e);
+                    _errorHandler.DisplayParseExceptionMessage(e);
                 }
                 catch (LengthException e)
                 {
-                    _errorHandler.DisplayLengthErrorMessage(e);
+                    _errorHandler.DisplayLengthExceptionMessage(e);
                 }
                 
             }

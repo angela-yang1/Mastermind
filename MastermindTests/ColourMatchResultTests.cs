@@ -13,42 +13,42 @@ namespace MastermindTests
             { Colour.Blue, Colour.Green, Colour.Yellow, Colour.Blue };
 
         [Fact]
-        public void GivenCorrectColourAndIndex_ShouldReturnTrue_ForFourBlackValues()
+        public void GivenCorrectColourAndIndex_ShouldReturnFourBlackValues()
         {
             var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Blue, Colour.Green, Colour.Yellow, Colour.Blue };
-            colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
+            colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
 
-            var result = colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
+            var result = colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
                 
             Assert.True(result
                 .All(c => c == ResultColour.Black) && result.Count == 4);
         }
         
         [Fact]
-        public void GivenTwoCorrectColourAndIndex_ShouldReturnTrue_ForTwoBlackValues()
+        public void GivenTwoCorrectColourAndIndex_ShouldReturnTwoBlackValues()
         {
             var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Blue, Colour.Green, Colour.Red, Colour.Orange };
-            colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
+            colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
             
-            var result = colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
+            var result = colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
 
             Assert.True(result
                 .All(c => c == ResultColour.Black) && result.Count == 2);
         }
         
         [Fact]
-        public void GivenTwoCorrectColoursWithIncorrectIndex_ShouldReturnTrue_ForTwoWhiteValues()
+        public void GivenTwoCorrectColoursWithIncorrectIndex_ShouldReturnTwoWhiteValues()
         {
             var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Red, Colour.Blue, Colour.Green, Colour.Orange };
-            colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
+            colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
 
-            var result = colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
+            var result = colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
             
             Assert.True(result
                 .All(c => c == ResultColour.White) && result.Count == 2);
@@ -60,9 +60,9 @@ namespace MastermindTests
             var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Blue, Colour.Blue, Colour.Green, Colour.Blue };
-            colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
+            colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
 
-            var result = colourMatchResult.CreateResult(userGuesses, _masterSelectedColours);
+            var result = colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
             var blackCount = result.Count(c => c == ResultColour.Black);
             var whiteCount = result.Count(c => c == ResultColour.White);
             

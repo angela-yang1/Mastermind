@@ -6,7 +6,7 @@ namespace MastermindTests
     public class TurnCountTrackerTests
     {
         [Fact]
-        public void NextTurn_ShouldIncrementGuessCountBy1()
+        public void CallingNextTurn_ShouldIncrementGuessCountBy1()
         {
             var turnCountTracker = new TurnCountTracker(Constants.MaxTries);
             turnCountTracker.NextTurn();
@@ -17,7 +17,7 @@ namespace MastermindTests
         }
         
         [Fact]
-        public void NextTurn_ShouldIncrementGuessCountBy5()
+        public void CallingNextTurn_ShouldIncrementGuessCounterTo6()
         {
             var turnCountTracker = new TurnCountTracker(Constants.MaxTries);
             turnCountTracker.NextTurn();
@@ -32,7 +32,7 @@ namespace MastermindTests
         }
         
         [Fact]
-        public void WhenMaxGuessTriesReached_ReturnTrue()
+        public void HasMaxTriesBeenReached_ShouldReturnTrue_WhenMaxTriesReached()
         {
             var turnCountTracker = new TurnCountTracker(2);
             turnCountTracker.NextTurn();
@@ -44,7 +44,7 @@ namespace MastermindTests
         }
         
         [Fact]
-        public void WhenMaxGuessTriesNotReached_ReturnFalse()
+        public void HasMaxTriesBeenReached_ShouldReturnFalse_WhenMaxTriesNotReached()
         {
             var turnCountTracker = new TurnCountTracker(Constants.MaxTries);
             turnCountTracker.NextTurn();

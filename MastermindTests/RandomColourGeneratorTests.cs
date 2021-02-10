@@ -16,15 +16,5 @@ namespace MastermindTests
 
             Assert.Equal(4, result.Length);
         }
-        
-        [Fact]
-        public void GenerateFourRandomColours_ShouldContainColourValues()
-        {
-            var randomGenerator = new RandomColourGenerator(4);
-
-            var result = randomGenerator.Generate();
-
-            Assert.IsType<Colour[]>(result);
-        }
     }
 }

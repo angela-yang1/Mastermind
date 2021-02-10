@@ -22,7 +22,7 @@ namespace MastermindTests
             var inputHandler = new InputHandler(mockInputReceiver.Object, mockErrorHandler.Object);
             var result = inputHandler.TakeInput();
             
-            mockErrorHandler.Verify(e => e.DisplayParseErrorMessage(It.IsAny<ParseException>()), Times.Never);
+            mockErrorHandler.Verify(e => e.DisplayParseExceptionMessage(It.IsAny<ParseException>()), Times.Never);
             Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
         }
 
@@ -40,7 +40,7 @@ namespace MastermindTests
             var result = inputHandler.TakeInput();
         
             mockErrorHandler.Verify(e =>
-                e.DisplayParseErrorMessage(It.Is<ParseException>(e => e.InvalidColourInput.Contains("Pink"))), Times.Once);
+                e.DisplayParseExceptionMessage(It.Is<ParseException>(parseException => parseException.InvalidColourInput.Contains("Pink"))), Times.Once);
             Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
         }
         
@@ -58,7 +58,7 @@ namespace MastermindTests
             var result = inputHandler.TakeInput();
         
             mockErrorHandler.Verify(e =>
-                e.DisplayLengthErrorMessage(It.Is<LengthException>(e => e.InputColourCount == 3)), Times.Once);
+                e.DisplayLengthExceptionMessage(It.Is<LengthException>(lengthException => lengthException.InputColourCount == 3)), Times.Once);
             Assert.Equal(new[] { Colour.Red, Colour.Blue, Colour.Yellow, Colour.Green }, result);
         }
         
@@ -73,7 +73,7 @@ namespace MastermindTests
             var inputHandler = new InputHandler(mockInputReceiver.Object, mockErrorHandler.Object);
             var result = inputHandler.TakeInput();
             
-            mockErrorHandler.Verify(e => e.DisplayParseErrorMessage(It.IsAny<ParseException>()), Times.Never);
+            mockErrorHandler.Verify(e => e.DisplayParseExceptionMessage(It.IsAny<ParseException>()), Times.Never);
             Assert.Equal(UserOption.Quit, result);
         }
     }

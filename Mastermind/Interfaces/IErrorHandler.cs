@@ -5,7 +5,7 @@ namespace Mastermind.Interfaces
 {
     public interface IErrorHandler
     {
-        public void DisplayParseErrorMessage(ParseException e);
-        public void DisplayLengthErrorMessage(LengthException e);
+        public void DisplayParseExceptionMessage(ParseException e);
+        public void DisplayLengthExceptionMessage(LengthException e);
     }
 }

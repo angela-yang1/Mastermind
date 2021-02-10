@@ -7,27 +7,27 @@ namespace Mastermind
 {
     public class ColourMatchResult
     {
-        public List<ResultColour> CreateResult(Colour[] guesses, Colour[] selectedColours)
+        public List<ResultColour> CreateResult(Colour[] masterColours, Colour[] guesses)
         {
             var result = new List<ResultColour>();
             var guessesList = guesses.ToList();
-            var selectedColoursList = selectedColours.ToList();
+            var masterColoursList = masterColours.ToList();
 
             // black
             for (var i = guessesList.Count - 1; i >= 0; i--)
             {
-                if (guessesList[i] == selectedColoursList[i])
+                if (guessesList[i] == masterColoursList[i])
                 {
                     result.Add(ResultColour.Black);
                     guessesList.RemoveAt(i);
-                    selectedColoursList.RemoveAt(i);
+                    masterColoursList.RemoveAt(i);
                 }
             }
 
             // white
             for (var i = guessesList.Count - 1; i >= 0; i--)
             {
-                if (selectedColoursList.Contains(guessesList[i]))
+                if (masterColoursList.Contains(guessesList[i]))
                 {
                     result.Add(ResultColour.White);
                 }
