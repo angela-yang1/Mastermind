@@ -19,14 +19,14 @@ namespace MastermindTests
             mockInputHandler.Setup(ge => ge.TakeInput())
                 .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
 
-            var mockDisplayMessage = new Mock<IDisplay>();
+            var mockDisplay = new Mock<IDisplay>();
 
-            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
+            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplay.Object);
             gameEngine.Run();
             
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
             mockInputHandler.Verify(ge => ge.TakeInput(), Times.Once);
-            mockDisplayMessage.Verify(w => w.Win(), Times.Once);
+            mockDisplay.Verify(w => w.Win(), Times.Once);
         }
         
         [Fact]
@@ -41,15 +41,15 @@ namespace MastermindTests
                 .Returns(new[] { Colour.Red, Colour.Yellow, Colour.Green, Colour.Red })
                 .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
 
-            var mockDisplayMessage = new Mock<IDisplay>();
+            var mockDisplay = new Mock<IDisplay>();
 
-            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
+            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplay.Object);
             gameEngine.Run();
             
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
             mockInputHandler.Verify(ge => ge.TakeInput(), Times.AtLeastOnce);
-            mockDisplayMessage.Verify(i => i.NoColourMatch(), Times.Once);
-            mockDisplayMessage.Verify(w => w.Win(), Times.Once);
+            mockDisplay.Verify(i => i.NoColourMatch(), Times.Once);
+            mockDisplay.Verify(w => w.Win(), Times.Once);
         }
         
         [Fact]
@@ -63,9 +63,9 @@ namespace MastermindTests
             mockInputHandler.Setup(ge => ge.TakeInput())
                 .Returns(new[] { Colour.Red, Colour.Blue, Colour.Blue, Colour.Blue });
             
-            var mockDisplayMessage = new Mock<IDisplay>();
+            var mockDisplay = new Mock<IDisplay>();
 
-            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
+            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplay.Object);
             gameEngine.Run();
             
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
@@ -83,14 +83,14 @@ namespace MastermindTests
             mockInputHandler.Setup(ge => ge.TakeInput())
                 .Returns(UserOption.Quit);
             
-            var mockDisplayMessage = new Mock<IDisplay>();
+            var mockDisplay = new Mock<IDisplay>();
             
-            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplayMessage.Object);
+            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplay.Object);
             gameEngine.Run();
 
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
             mockInputHandler.Verify(i => i.TakeInput(), Times.Once);
-            mockDisplayMessage.Verify(q => q.Quit(), Times.Once);
+            mockDisplay.Verify(q => q.Quit(), Times.Once);
         }
     }
 }

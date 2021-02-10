@@ -25,7 +25,6 @@ namespace Mastermind
                     colourArray[i] = colour;
                 }
                 catch (ArgumentException) {
-                    // add errors to list - custom exception (only once)
                     if (!invalidColours.Contains(trimmedInput))
                     {
                         invalidColours.Add(trimmedInput);
@@ -35,9 +34,6 @@ namespace Mastermind
 
             if (invalidColours.Count > 0)
             {
-                // use ParseException
-                //throw new ArgumentException($"{String.Join(", ", invalidColours)} is not a valid colour.");
-
                 throw new ParseException(invalidColours);
             }
             
@@ -45,7 +41,6 @@ namespace Mastermind
             return colourArray;
         }
         
-        // move into own class to use in InputHandler
         private static string StringToTitleCase(string userInput)
         {
             return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userInput);

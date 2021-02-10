@@ -7,7 +7,6 @@ namespace Mastermind
     {
         public string GetUserInput()
         {
-            // separate getting user input and converting toUpperCase
             Console.WriteLine
                 ("\nPlease enter your four guesses (separated by a comma), " +
                  "or 'Quit' to quit the game:");
