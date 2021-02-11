@@ -40,3 +40,8 @@ The element 0 => Red is at the correct index so Black is added to the return arr
 The Mastermind would then return ["Black", "White"] (But not necessarily in that order as the return array is shuffled my the Mastermind).
 
 Keep guessing until you pass the correct solution which will pass the Kata.
+
+
+Class Diagram
+
+![alt text](https://github.com/angela-yang1/Mastermind/blob/main/Documents/Mastermind-Class%20Diagram.jpg?raw=true)
