@@ -42,6 +42,6 @@ The Mastermind would then return ["Black", "White"] (But not necessarily in that
 Keep guessing until you pass the correct solution which will pass the Kata.
 
 
-Class Diagram
+## Class Diagram
 
 ![class diagram](https://github.com/angela-yang1/Mastermind/blob/main/Documents/Mastermind-Class%20Diagram.jpg)
