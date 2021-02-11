@@ -44,4 +44,4 @@ Keep guessing until you pass the correct solution which will pass the Kata.
 
 Class Diagram
 
-![class diagram](Documents/Mastermind-Class Diagram.jpg)
+![class diagram](Mastermind/Documents/Mastermind-Class Diagram.jpg)
