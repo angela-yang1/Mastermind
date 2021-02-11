@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Figgle;
 using Mastermind.Enums;
 using Mastermind.Interfaces;
@@ -14,41 +15,41 @@ namespace Mastermind
                 FiggleFonts.Bolger.Render("Mastermind"));
         }
 
-        public void AvailableColours()
+        public void DisplayAvailableColours()
         {
             Console.WriteLine("🧠 Here are your available colours: 🧠");
-
+            
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("Red");
+            Console.Write($"{ Colour.Red }");
             Console.ResetColor();
             Console.Write(", ");
             
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("Blue");
+            Console.Write($"{ Colour.Blue }");
             Console.ResetColor();
             Console.Write(", ");
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Green");
+            Console.Write($"{ Colour.Green }");
             Console.ResetColor();
             Console.Write(", ");
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.Write("Orange");
+            Console.Write($"{ Colour.Orange }");
             Console.ResetColor();
             Console.Write(", ");
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.Write("Purple");
+            Console.Write($"{ Colour.Purple }");
             Console.ResetColor();
             Console.Write(", ");
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Yellow \n");
+            Console.Write($"{ Colour.Yellow }\n");
             
             Console.ResetColor();
         }
-        
+
         public void Win()
         {
             Console.WriteLine("\nAll your guesses match! You've won!\n");

@@ -27,14 +27,12 @@ namespace Mastermind
         public void Run()
         {
             _display.Welcome();
-            _display.AvailableColours();
+            _display.DisplayAvailableColours();
             var hasAWinner = false;
             
-            // generate 4 random colours
             var masterColours = _randomGenerator.Generate();
-            Console.WriteLine("MASTER COLOURS: "+ string.Join(", ", masterColours));
+            //Console.WriteLine("MASTER COLOURS: "+ string.Join(", ", masterColours));
 
-            // loop until user wins or reaches max guesses
             while (!hasAWinner && !HasMaxTriesReached())
             {
                 // get validated input
@@ -44,23 +42,19 @@ namespace Mastermind
                     // - extension method to make class more explicit and more descriptive
                 if (userAnswer.GetSelectedAlternative() == 2)
                 {
-                    // value 2 = UserOption
                     var userSelectedOption = userAnswer.Value2;
                     
                     if (QuitApplication(userSelectedOption)) 
                         break;
                 }
                 
-                // value 1 = colours array
                 var userSelectedColours = userAnswer.Value1;
-
-                // check for matching colours (output: black/white)
+                
                 var matchResult = _colourMatchResult.CreateResult(userSelectedColours, masterColours);
 
                 // check for any matches
                 if (matchResult.Count != 0)
                 {
-                    // check against guess checker
                     _display.TurnCounter(_turnCountTracker.Counter, matchResult);
                     hasAWinner = IsThereAWinner(matchResult);
                 }

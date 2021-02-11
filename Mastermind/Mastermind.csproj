@@ -7,7 +7,11 @@
 
     <ItemGroup>
       <PackageReference Include="Figgle" Version="0.4.0" />
-      <PackageReference Include="Masb.Either" Version="0.2.0" />
+      <PackageReference Include="Masb.Either" Version="0.2.0">
+        <!-- Masb.Either was built using .NETFramework v4.8, but we are on .NET Core 3.1 -->
+        <!-- However, the code is compatible. -->
+        <NoWarn>NU1701</NoWarn>
+      </PackageReference>
     </ItemGroup>
 
 </Project>

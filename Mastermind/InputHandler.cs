@@ -1,4 +1,3 @@
-#nullable enable
 using System;
 using System.Collections.Generic;
 using BCL;
@@ -23,9 +22,6 @@ namespace Mastermind
         
         public Either<Colour[], UserOption> TakeInput()
         {
-            // shouldn't be controlled by input/outputs
-            // take in user input as parameter and remove while loop?
-            
             while (true)
             {
                 var userInput = _inputReceiver.GetUserInput();
@@ -50,7 +46,6 @@ namespace Mastermind
                 {
                     _errorHandler.DisplayLengthExceptionMessage(e);
                 }
-                
             }
         }
     }

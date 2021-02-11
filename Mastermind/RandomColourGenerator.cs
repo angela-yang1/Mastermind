@@ -23,7 +23,11 @@ namespace Mastermind
             for (var i = 0; i < _selectedColours.Length; i++)
             {
                 var randomChosenIndex = random.Next(0, enumValues.Length);
-                _selectedColours[i] = (Colour)enumValues.GetValue(randomChosenIndex);
+                
+                // This can never be null, because the index is within the bounds of
+                // the `enumValues` array.
+                // ReSharper disable once PossibleNullReferenceException
+                _selectedColours[i] = (Colour) enumValues.GetValue(randomChosenIndex);
             }
 
             return _selectedColours;

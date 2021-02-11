@@ -36,8 +36,6 @@ namespace Mastermind
             {
                 throw new ParseException(invalidColours);
             }
-            
-            // only return after validating user input and converting string[] to enum[]
             return colourArray;
         }
         

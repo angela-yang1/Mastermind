@@ -48,6 +48,25 @@ namespace MastermindTests
             mockDisplay.Verify(i => i.NoColourMatch(), Times.Once);
             mockDisplay.Verify(w => w.Win(), Times.Once);
         }
+        
+        [Fact]
+        public void GivenMaxTries60Reached_ShouldDisplayMaxGuessesMessage_AndQuit()
+        {
+            var mockRandomGen = new Mock<IRandomGenerator>();
+            mockRandomGen.Setup(rng => rng.Generate())
+                .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
+            var mockInputHandler = new Mock<IInputHandler>();
+            mockInputHandler.Setup(ge => ge.TakeInput())
+                .Returns(new[] { Colour.Red, Colour.Blue, Colour.Blue, Colour.Blue });
+            var mockDisplay = new Mock<IDisplay>();
+        
+            var gameEngine = new GameEngine(mockRandomGen.Object, mockInputHandler.Object, mockDisplay.Object);
+            gameEngine.Run();
+            
+            mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
+            mockInputHandler.Verify(ge => ge.TakeInput(), Times.Exactly(60));
+            mockDisplay.Verify(m => m.MaxGuesses(), Times.Once);
+        }
 
         [Fact]
         public void GivenUserInput_IsUserOptionQuit_ShouldQuitGame()
@@ -65,7 +84,7 @@ namespace MastermindTests
             gameEngine.Run();
 
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
-            mockInputHandler.Verify(i => i.TakeInput(), Times.Once);
+            mockInputHandler.Verify(i => i.TakeInput(), Times.Exactly(2));
             mockDisplay.Verify(q => q.Quit(), Times.Once);
         }
     }
