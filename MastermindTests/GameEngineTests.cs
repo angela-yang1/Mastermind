@@ -11,7 +11,7 @@ namespace MastermindTests
         [Fact]
         public void GivenCorrectGuess_LoopShouldStop_AndPrintWinMessage()
         {
-            var mockRandomGen = new Mock<IRandomGenerator>();
+            var mockRandomGen = new Mock<IRandomColourGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
                 .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
             var mockInputHandler = new Mock<IInputHandler>();
@@ -30,7 +30,7 @@ namespace MastermindTests
         [Fact]
         public void GivenNoColourMatches_ShouldDisplayNoMatchMessage()
         {
-            var mockRandomGen = new Mock<IRandomGenerator>();
+            var mockRandomGen = new Mock<IRandomColourGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
                 .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
             var mockInputHandler = new Mock<IInputHandler>();
@@ -46,13 +46,12 @@ namespace MastermindTests
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
             mockInputHandler.Verify(ge => ge.TakeInput(), Times.Exactly(3));
             mockDisplay.Verify(i => i.NoColourMatch(), Times.Once);
-            mockDisplay.Verify(w => w.Win(), Times.Once);
         }
         
         [Fact]
-        public void GivenMaxTries60Reached_ShouldDisplayMaxGuessesMessage_AndQuit()
+        public void GivenMaxTries60Reached_ShouldDisplayMaxGuessesMessage()
         {
-            var mockRandomGen = new Mock<IRandomGenerator>();
+            var mockRandomGen = new Mock<IRandomColourGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
                 .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
             var mockInputHandler = new Mock<IInputHandler>();
@@ -71,12 +70,11 @@ namespace MastermindTests
         [Fact]
         public void GivenUserInput_IsUserOptionQuit_ShouldQuitGame()
         {
-            var mockRandomGen = new Mock<IRandomGenerator>();
+            var mockRandomGen = new Mock<IRandomColourGenerator>();
             mockRandomGen.Setup(rng => rng.Generate())
                 .Returns(new[] { Colour.Blue, Colour.Blue, Colour.Blue, Colour.Blue });
             var mockInputHandler = new Mock<IInputHandler>();
-            mockInputHandler.SetupSequence(ge => ge.TakeInput())
-                .Returns(new[] { Colour.Red, Colour.Blue, Colour.Blue, Colour.Blue })
+            mockInputHandler.Setup(ge => ge.TakeInput())
                 .Returns(UserOption.Quit);
             var mockDisplay = new Mock<IDisplay>();
             
@@ -84,7 +82,7 @@ namespace MastermindTests
             gameEngine.Run();
 
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
-            mockInputHandler.Verify(i => i.TakeInput(), Times.Exactly(2));
+            mockInputHandler.Verify(i => i.TakeInput(), Times.Exactly(1));
             mockDisplay.Verify(q => q.Quit(), Times.Once);
         }
     }

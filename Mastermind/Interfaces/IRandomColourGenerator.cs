@@ -2,7 +2,7 @@ using Mastermind.Enums;
 
 namespace Mastermind.Interfaces
 {
-    public interface IRandomGenerator
+    public interface IRandomColourGenerator
     {
         public Colour[] Generate();
     }

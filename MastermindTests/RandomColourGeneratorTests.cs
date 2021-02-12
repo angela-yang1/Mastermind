@@ -10,9 +10,9 @@ namespace MastermindTests
         [Fact]
         public void GenerateFourRandomColours_WhenGameBegins()
         {
-            var randomGenerator = new RandomColourGenerator(4);
+            var randomColourGenerator = new RandomColourColourGenerator(4);
 
-            var result = randomGenerator.Generate();
+            var result = randomColourGenerator.Generate();
 
             Assert.Equal(4, result.Length);
         }

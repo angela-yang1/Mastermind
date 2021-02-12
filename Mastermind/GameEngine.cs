@@ -7,16 +7,16 @@ namespace Mastermind
 {
     public class GameEngine
     {
-        private readonly IRandomGenerator _randomGenerator;
+        private readonly IRandomColourGenerator _randomColourGenerator;
         private readonly IInputHandler _inputHandler;
         private readonly IDisplay _display;
         private readonly ColourMatchResult _colourMatchResult;
         private readonly TurnCountTracker _turnCountTracker;
         private readonly WinnerChecker _winnerChecker;
 
-        public GameEngine(IRandomGenerator randomGenerator, IInputHandler inputHandler, IDisplay display)
+        public GameEngine(IRandomColourGenerator randomColourGenerator, IInputHandler inputHandler, IDisplay display)
         {
-            _randomGenerator = randomGenerator;
+            _randomColourGenerator = randomColourGenerator;
             _inputHandler = inputHandler;
             _display = display;
             _colourMatchResult = new ColourMatchResult();
@@ -30,15 +30,15 @@ namespace Mastermind
             _display.DisplayAvailableColours();
             var hasAWinner = false;
             
-            var masterColours = _randomGenerator.Generate();
+            var masterColours = _randomColourGenerator.Generate();
             //Console.WriteLine("MASTER COLOURS: "+ string.Join(", ", masterColours));
 
             while (!hasAWinner && !HasMaxTriesReached())
             {
-                // get validated input
+                // Get validated input
                 var userAnswer = _inputHandler.TakeInput();
 
-                // user selected menu option
+                // User selected menu option
                     // - extension method to make class more explicit and more descriptive
                 if (userAnswer.GetSelectedAlternative() == 2)
                 {
@@ -52,7 +52,7 @@ namespace Mastermind
                 
                 var matchResult = _colourMatchResult.CreateResult(userSelectedColours, masterColours);
 
-                // check for any matches
+                // Check for any matches
                 if (matchResult.Count != 0)
                 {
                     _display.TurnCounter(_turnCountTracker.Counter, matchResult);
