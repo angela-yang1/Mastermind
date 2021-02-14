@@ -12,7 +12,7 @@ namespace Mastermind
             var result = new List<ResultColour>();
             var guessesList = guesses.ToList();
             var masterColoursList = masterColours.ToList();
-
+            
             for (var i = guessesList.Count - 1; i >= 0; i--)
             {
                 if (guessesList[i] == masterColoursList[i])
@@ -22,7 +22,7 @@ namespace Mastermind
                     masterColoursList.RemoveAt(i);
                 }
             }
-
+            
             for (var i = guessesList.Count - 1; i >= 0; i--)
             {
                 if (masterColoursList.Contains(guessesList[i]))
@@ -37,5 +37,21 @@ namespace Mastermind
 
             return shuffledResult;
         }
+
+        // look into using with OrderBy - rng
+        // private void Shuffle(List<ResultColour> matchResult)
+        // {
+        //     var random = new Random();
+        //     var num = matchResult.Count;
+        //
+        //     while (num > 1)
+        //     {
+        //         num--;
+        //         var randomNum = random.Next(num + 1);
+        //         var value = matchResult[randomNum];
+        //         matchResult[randomNum] = matchResult[num];
+        //         matchResult[num] = value;
+        //     }
+        // }
     }
 }

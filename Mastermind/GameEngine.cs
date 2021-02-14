@@ -31,14 +31,12 @@ namespace Mastermind
             var hasAWinner = false;
             
             var masterColours = _randomColourGenerator.Generate();
-            //Console.WriteLine("MASTER COLOURS: "+ string.Join(", ", masterColours));
+            Console.WriteLine("\nMASTER COLOURS: "+ string.Join(", ", masterColours));
 
             while (!hasAWinner && !HasMaxTriesReached())
             {
-                // Get validated input
                 var userAnswer = _inputHandler.TakeInput();
-
-                // User selected menu option
+                
                 if (userAnswer.GetSelectedAlternative() == 2)
                 {
                     var userSelectedOption = userAnswer.Value2;
@@ -48,10 +46,8 @@ namespace Mastermind
                 }
                 
                 var userSelectedColours = userAnswer.Value1;
-                
                 var matchResult = _colourMatchResult.CreateResult(userSelectedColours, masterColours);
-
-                // Check for any matches
+                
                 if (matchResult.Count != 0)
                 {
                     _display.TurnCounter(_turnCountTracker.Counter, matchResult);
