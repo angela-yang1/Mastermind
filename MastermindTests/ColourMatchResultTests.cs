@@ -18,7 +18,6 @@ namespace MastermindTests
             var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Blue, Colour.Green, Colour.Yellow, Colour.Blue };
-            colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
 
             var result = colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
                 
@@ -32,7 +31,6 @@ namespace MastermindTests
             var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Blue, Colour.Green, Colour.Red, Colour.Orange };
-            colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
             
             var result = colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
 
@@ -46,7 +44,6 @@ namespace MastermindTests
             var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Red, Colour.Blue, Colour.Green, Colour.Orange };
-            colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
 
             var result = colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
             
@@ -55,12 +52,11 @@ namespace MastermindTests
         }
      
         [Fact]
-        public void GivenDuplicateColoursWithIncorrectIndex_ShouldReturnOneWhiteAndOneBlackValues()
+        public void GivenDuplicateColoursWithIncorrectIndex_ShouldReturnOneWhiteAndTwoBlackValues()
         {
             var colourMatchResult = new ColourMatchResult();
             var userGuesses = new[] 
                 { Colour.Blue, Colour.Blue, Colour.Green, Colour.Blue };
-            colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
 
             var result = colourMatchResult.CreateResult(_masterSelectedColours, userGuesses);
             var blackCount = result.Count(c => c == ResultColour.Black);

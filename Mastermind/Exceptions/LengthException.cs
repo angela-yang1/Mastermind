@@ -4,12 +4,12 @@ namespace Mastermind.Exceptions
 {
     public class LengthException : Exception
     {
-        public int MasterColourCount { get; }
+        public int MasterColoursCount { get; }
         public int InputColourCount { get; }
 
-        public LengthException(int masterColourCount, int inputColourCount)
+        public LengthException(int masterColoursCount, int inputColourCount)
         {
-            MasterColourCount = masterColourCount;
+            MasterColoursCount = masterColoursCount;
             InputColourCount = inputColourCount;
         }
     }

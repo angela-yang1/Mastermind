@@ -27,7 +27,7 @@ namespace Mastermind
         public void Run()
         {
             _display.Welcome();
-            _display.DisplayAvailableColours();
+            _display.AvailableColours();
             var hasAWinner = false;
             
             var masterColours = _randomColourGenerator.Generate();
@@ -83,7 +83,7 @@ namespace Mastermind
         private bool IsThereAWinner(List<ResultColour> matchResult)
         {
             if (!_winnerChecker.HasUserWon(matchResult)) return false;
-            _display.Win();
+            _display.Won();
             return true;
         }
     }

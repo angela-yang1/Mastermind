@@ -14,7 +14,7 @@ namespace Mastermind
 
         public void DisplayLengthExceptionMessage(LengthException e)
         {
-            Console.WriteLine($"\nError: You must pass {e.MasterColourCount} colours. You have entered {e.InputColourCount}");
+            Console.WriteLine($"\nError: You must pass {e.MasterColoursCount} colours. You have entered {e.InputColourCount}");
         }
     }
 }

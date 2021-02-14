@@ -24,7 +24,7 @@ namespace MastermindTests
             
             mockRandomGen.Verify(rng => rng.Generate(), Times.Once);
             mockInputHandler.Verify(ge => ge.TakeInput(), Times.Once);
-            mockDisplay.Verify(w => w.Win(), Times.Once);
+            mockDisplay.Verify(w => w.Won(), Times.Once);
         }
         
         [Fact]

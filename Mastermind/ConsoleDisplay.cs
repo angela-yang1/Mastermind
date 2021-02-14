@@ -15,7 +15,7 @@ namespace Mastermind
                 FiggleFonts.Bolger.Render("Mastermind"));
         }
 
-        public void DisplayAvailableColours()
+        public void AvailableColours()
         {
             Console.WriteLine("🧠 Here are your available colours: 🧠");
             
@@ -50,7 +50,7 @@ namespace Mastermind
             Console.ResetColor();
         }
 
-        public void Win()
+        public void Won()
         {
             Console.WriteLine("\nAll your guesses match! You've won!\n");
         }
