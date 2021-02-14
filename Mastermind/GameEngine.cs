@@ -39,7 +39,6 @@ namespace Mastermind
                 var userAnswer = _inputHandler.TakeInput();
 
                 // User selected menu option
-                    // - extension method to make class more explicit and more descriptive
                 if (userAnswer.GetSelectedAlternative() == 2)
                 {
                     var userSelectedOption = userAnswer.Value2;

@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var randomGen = new RandomColourColourGenerator(Constants.MasterColoursCount);
+            var randomGen = new RandomColourGenerator(Constants.MasterColoursCount);
             var inputReceiver = new InputReceiver();
             var errorHandler = new ConsoleErrorHandler();
             var consoleDisplay = new ConsoleDisplay();
