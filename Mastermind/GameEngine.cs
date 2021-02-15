@@ -46,7 +46,7 @@ namespace Mastermind
                 }
                 
                 var userSelectedColours = userAnswer.Value1;
-                var matchResult = _colourMatchResult.CreateResult(userSelectedColours, masterColours);
+                var matchResult = _colourMatchResult.CreateResult(masterColours, userSelectedColours);
                 
                 if (matchResult.Count != 0)
                 {
