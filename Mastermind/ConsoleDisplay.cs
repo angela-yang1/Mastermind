@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Figgle;
 using Mastermind.Enums;
 using Mastermind.Interfaces;
@@ -62,7 +61,7 @@ namespace Mastermind
         
         public void MaxGuesses()
         {
-            Console.WriteLine("Game over! You've reached the maximum guesses of 60");
+            Console.WriteLine($"Game over! You've reached the maximum guesses of {Constants.MaxTries}");
         }
         
         public void Quit()

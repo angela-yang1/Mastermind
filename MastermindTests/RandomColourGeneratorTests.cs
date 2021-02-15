@@ -1,6 +1,4 @@
-using System;
 using Mastermind;
-using Mastermind.Enums;
 using Xunit;
 
 namespace MastermindTests

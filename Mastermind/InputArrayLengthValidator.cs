@@ -1,4 +1,3 @@
-using System;
 using Mastermind.Enums;
 using Mastermind.Exceptions;
 

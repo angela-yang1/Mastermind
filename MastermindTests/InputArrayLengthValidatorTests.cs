@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Mastermind;
 using Mastermind.Enums;
 using Mastermind.Exceptions;

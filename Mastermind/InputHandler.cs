@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using BCL;
 using Mastermind.Enums;
 using Mastermind.Exceptions;

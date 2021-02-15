@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Mastermind.Exceptions;
 using Mastermind.Interfaces;
 

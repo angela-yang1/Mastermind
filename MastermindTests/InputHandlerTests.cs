@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.InteropServices;
 using Mastermind;
 using Mastermind.Enums;
 using Mastermind.Exceptions;
@@ -52,7 +50,7 @@ namespace MastermindTests
 
             mockInputReceiver.SetupSequence(i => i.GetUserInput())
                 .Returns("Blue, Yellow, Green")
-                .Returns("Red, Blue, Yellow, Green");;
+                .Returns("Red, Blue, Yellow, Green");
         
             var inputHandler = new InputHandler(mockInputReceiver.Object, mockErrorHandler.Object);
             var result = inputHandler.TakeInput();

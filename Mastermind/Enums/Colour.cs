@@ -1,5 +1,3 @@
-using System;
-
 namespace Mastermind.Enums
 {
     public enum Colour

@@ -1,4 +1,3 @@
-using System;
 using Mastermind.Exceptions;
 
 namespace Mastermind.Interfaces
